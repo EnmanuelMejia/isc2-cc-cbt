@@ -1,0 +1,894 @@
+{
+  "modules": [
+    {
+      "id": "binary",
+      "title": "Binary & Number Bases",
+      "why": "Computers count in binary. Reading bits, converting between binary, decimal, and hex, and understanding octal unlocks networking, memory, permissions, and cryptography topics across the catalog.",
+      "lectures": [
+        {
+          "id": "bin-bits-bytes",
+          "title": "Bits and bytes",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "Bits and bytes",
+              "lede": "Every photo, video, and program is stored as bits. Learn what a bit is and the whole digital world starts making sense.",
+              "narration": "This lecture defines bits and bytes, counts in powers of two, and explains why computers chose binary in the first place."
+            },
+            {
+              "kind": "bullets",
+              "heading": "The smallest pieces",
+              "bullets": [
+                "A bit is one binary digit: 0 or 1. It is the smallest possible piece of information.",
+                "A byte is 8 bits. One byte can represent 256 different values, from 0 to 255.",
+                "Computers use binary because hardware is built from switches: on or off, current or no current.",
+                "Counting bits goes in powers of two: 1, 2, 4, 8, 16, 32, 64, 128, 256...",
+                "Those powers appear everywhere: 256 IP values per octet, 8-bit file permissions, 64-bit processors."
+              ],
+              "narration": "Bits are binary digits, bytes are groups of eight, and powers of two are the counting rhythm of all computing hardware."
+            },
+            {
+              "kind": "code",
+              "heading": "Powers of two",
+              "code": {
+                "lang": "text",
+                "code": "2^0 = 1\n2^1 = 2\n2^2 = 4\n2^3 = 8\n2^4 = 16\n2^5 = 32\n2^6 = 64\n2^7 = 128\n2^8 = 256   <- values in one byte"
+              },
+              "walkthrough": "Each row doubles the last: that is what raising 2 to a power means. 2^8 = 256 is the key fact — one byte holds 256 distinct values, which is why an IPv4 octet ranges from 0 to 255.",
+              "narration": "Memorize the powers of two up to 2^8. They are the multiplication table of computing, and 256 is the most important number on it."
+            },
+            {
+              "kind": "diagram",
+              "heading": "From bit to byte",
+              "diagram": {
+                "type": "layers",
+                "title": "From bit to byte",
+                "nodes": ["bit: 0 or 1", "4 bits = 1 nibble", "8 bits = 1 byte", "1 byte = 256 values"],
+                "note": "A nibble is half a byte — exactly one hex digit, which is why hex and binary fit together so neatly."
+              },
+              "narration": "Bits stack into nibbles, nibbles into bytes, and bytes into the 256 values that address memory, color pixels, and number network octets."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: count the values",
+              "text": "How many different values can 4 bits represent? (Hint: it is 2^4.) Then: how many values can 2 bytes represent?",
+              "narration": "Apply the powers of two: 4 bits give 16 values, and 2 bytes give 65,536. This pattern answers every how many values question."
+            }
+          ]
+        },
+        {
+          "id": "bin-to-decimal",
+          "title": "Binary to decimal, step by step",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "Binary to decimal, step by step",
+              "lede": "Binary looks alien until you see the trick: each position is just a power of two. Add the ones that are switched on.",
+              "narration": "This lecture teaches positional notation and works a full binary-to-decimal conversion, digit by digit."
+            },
+            {
+              "kind": "bullets",
+              "heading": "Positional notation",
+              "bullets": [
+                "In decimal, 237 means 2 hundreds + 3 tens + 7 ones. Each position is worth ten times the one to its right.",
+                "Binary works identically, but each position is worth two times the one to its right: 1, 2, 4, 8, 16...",
+                "The rightmost position is always the ones place (2^0 = 1) in every base.",
+                "To convert: write each position's value under its digit, keep the values under the 1s, and add them up.",
+                "A 0 means that position contributes nothing. Only the 1s count."
+              ],
+              "narration": "Binary is positional notation with powers of two instead of powers of ten. Write the place values, keep the ones under the 1s, and add."
+            },
+            {
+              "kind": "code",
+              "heading": "Worked: 1011 to decimal",
+              "code": {
+                "lang": "text",
+                "code": "digits:        1    0    1    1\nplace values:  8    4    2    1\nkeep the 1s:  8    -    2    1\n\n8 + 2 + 1 = 11\n\n1011 (binary) = 11 (decimal)"
+              },
+              "walkthrough": "Label each digit with its place value: 8, 4, 2, 1 from left to right. The 1s sit under 8, 2, and 1; the 0 sits under 4 and contributes nothing. Add the kept values: 8 + 2 + 1 = 11.",
+              "narration": "Follow the three steps: label place values, keep only those under 1s, and add. Binary 1011 is decimal 11."
+            },
+            {
+              "kind": "diagram",
+              "heading": "The conversion recipe",
+              "diagram": {
+                "type": "flow",
+                "title": "The conversion recipe",
+                "nodes": ["write place values", "keep values under 1s", "add them up", "decimal answer"],
+                "note": "The same recipe converts any base to decimal — only the place values change."
+              },
+              "narration": "The recipe never changes: place values, keep the active ones, add. Master it in binary and hex becomes a small variation."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: convert 11010",
+              "text": "Convert binary 11010 to decimal using the recipe. Place values are 16, 8, 4, 2, 1. (Answer: 26.)",
+              "narration": "Work 11010 by hand: label, keep, add. Checking against 26 confirms the method before hex raises the stakes."
+            }
+          ]
+        },
+        {
+          "id": "bin-hex-octal",
+          "title": "Hex, octal, and going the other way",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "Hex, octal, and going the other way",
+              "lede": "Hexadecimal is binary's compact cousin: one hex digit per four bits. Learn the grouping trick and long bit strings shrink.",
+              "narration": "This lecture converts decimal to binary by repeated division, then introduces hexadecimal and octal as shorthand for bit groups."
+            },
+            {
+              "kind": "bullets",
+              "heading": "New bases",
+              "bullets": [
+                "Decimal to binary: divide by 2 repeatedly, keep the remainders, read them bottom-up.",
+                "Hexadecimal is base 16. Digits are 0-9 then A-F, where A=10 through F=15.",
+                "One hex digit holds exactly 4 bits, so binary converts to hex by grouping digits in fours.",
+                "Octal is base 8, digits 0-7, grouping bits in threes. You will meet it in Unix file permissions.",
+                "Hex shows up in memory addresses, color codes (#FF0000 is red), and MAC addresses."
+              ],
+              "narration": "Repeated division converts decimal to binary; grouping converts binary to hex and octal. Hex is everywhere addresses and colors appear."
+            },
+            {
+              "kind": "code",
+              "heading": "Worked: 13 to binary to hex",
+              "code": {
+                "lang": "text",
+                "code": "13 / 2 = 6 remainder 1\n 6 / 2 = 3 remainder 0\n 3 / 2 = 1 remainder 1\n 1 / 2 = 0 remainder 1\n\nread remainders bottom-up: 1101 (binary)\n\n1101 binary = D hex   (8+4+0+1 = 13, D = 13)"
+              },
+              "walkthrough": "Divide 13 by 2 repeatedly, recording each remainder. When the quotient hits 0, stop and read the remainders from bottom to top: 1101. Converting 1101 to decimal gives 13, and 13 in hex is the digit D.",
+              "narration": "Repeated division extracts binary digits as remainders; reading them upward rebuilds the number. Four bits then map to one hex digit."
+            },
+            {
+              "kind": "diagram",
+              "heading": "Grouping bits",
+              "diagram": {
+                "type": "compare",
+                "title": "Grouping bits",
+                "nodes": ["hex: 4 bits per digit", "octal: 3 bits per digit", "1111 is F in hex"],
+                "note": "Group from the right. Pad the leftmost group with zeros if it comes up short."
+              },
+              "narration": "Hex groups bits in fours, octal in threes. Grouping from the right with zero-padding is the whole technique."
+            },
+            {
+              "kind": "bullets",
+              "heading": "Common pitfalls",
+              "bullets": [
+                "Reading remainders top-down instead of bottom-up. The first remainder is the least significant digit: it goes last.",
+                "Forgetting that hex A-F are digits, not variables. F simply means 15.",
+                "Grouping bits from the left. Always group from the right, padding the leftmost group.",
+                "Mixing up 0x and 0 prefixes: 0x means hex, a leading 0 often means octal in code."
+              ],
+              "narration": "The classic errors: reading remainders in the wrong order, grouping from the wrong end, and misreading number prefixes."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: 26 to binary to hex",
+              "text": "Convert 26 to binary by repeated division, then group into hex. (Answers: 11010 binary, 1A hex.)",
+              "narration": "Chain both conversions on one number: divide to binary, group to hex. Two techniques, one answer, full confidence."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "subnetting",
+      "title": "Subnetting",
+      "why": "IP addresses are 32-bit numbers wearing dotted-decimal clothes. Reading octets, CIDR prefixes, and computing network and broadcast addresses by hand is core to networking, cloud, and security paths.",
+      "lectures": [
+        {
+          "id": "sub-ipv4-octets",
+          "title": "IPv4 addresses and octets",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "IPv4 addresses and octets",
+              "lede": "An IPv4 address is a 32-bit number split into four 8-bit chunks. Learn to see the bits inside the dots.",
+              "narration": "This lecture dissects IPv4 addresses: 32 bits, four octets, dotted-decimal notation, and the private ranges."
+            },
+            {
+              "kind": "bullets",
+              "heading": "Anatomy of an address",
+              "bullets": [
+                "An IPv4 address is 32 bits long: four groups of 8 bits.",
+                "Each 8-bit group is called an octet and holds a value from 0 to 255.",
+                "Dotted decimal writes each octet in decimal, separated by dots: 192.168.1.10.",
+                "The dots are human convenience. The wire sees 32 bits: 11000000101010000000000100001010.",
+                "Private ranges are reserved for internal networks: 10.x.x.x, 172.16.x.x to 172.31.x.x, and 192.168.x.x."
+              ],
+              "narration": "IPv4 is 32 bits in four octets, written dotted-decimal for humans. Private ranges mark addresses that never route on the public internet."
+            },
+            {
+              "kind": "code",
+              "heading": "Seeing the bits: 192.168.1.10",
+              "code": {
+                "lang": "text",
+                "code": "192      . 168      . 1        . 10\n11000000 . 10101000 . 00000001 . 00001010\n\nspot check: 192 = 128 + 64 -> bits 128,64 on\n            168 = 128 + 32 + 8 -> bits 128,32,8 on"
+              },
+              "walkthrough": "Convert each octet with the place-value recipe: 192 is 128+64, so the 128 and 64 bits are on: 11000000. 168 is 128+32+8: 10101000. The 1 and 10 octets convert the same way.",
+              "narration": "Each octet converts independently with the binary recipe. Reading dotted decimal as four binary bytes is the foundational subnetting skill."
+            },
+            {
+              "kind": "diagram",
+              "heading": "32 bits, 4 octets",
+              "diagram": {
+                "type": "hierarchy",
+                "title": "32 bits, 4 octets",
+                "nodes": ["32-bit address", "4 octets of 8 bits", "dotted decimal: 192.168.1.10"],
+                "note": "Subnetting is deciding how many of the 32 bits name the network versus the device."
+              },
+              "narration": "The address is a 32-bit number; octets are just the display format. Subnetting is the art of splitting those 32 bits between network and host."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: convert an octet",
+              "text": "Convert the octet 168 to binary by hand (place values 128, 64, 32, 16, 8, 4, 2, 1). Then convert 10. (Answers: 10101000, 00001010.)",
+              "narration": "Convert two octets by hand. Fluency here makes every later subnetting calculation dramatically easier."
+            }
+          ]
+        },
+        {
+          "id": "sub-cidr",
+          "title": "CIDR notation and masks",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "CIDR notation and masks",
+              "lede": "The /24 in 192.168.1.0/24 says how many bits name the network. Masks are the same idea in 32-bit form.",
+              "narration": "This lecture explains CIDR prefixes: what /n means, how masks encode it, and how to count usable addresses."
+            },
+            {
+              "kind": "bullets",
+              "heading": "Prefixes and masks",
+              "bullets": [
+                "CIDR notation appends /n to an address: /n means the first n bits identify the network.",
+                "The remaining 32 - n bits identify individual devices (hosts) on that network.",
+                "A subnet mask writes the same split as 32 bits: n ones followed by zeros, in dotted decimal.",
+                "/24 means 255.255.255.0: the first three octets are network, the last octet is hosts.",
+                "Usable hosts = 2^(host bits) - 2. Two addresses are always reserved: network and broadcast."
+              ],
+              "narration": "CIDR's slash number splits the 32 bits into network and host portions. Masks write the same split as an address, and the host-bit count determines network size."
+            },
+            {
+              "kind": "code",
+              "heading": "Worked: /24 to mask to host count",
+              "code": {
+                "lang": "text",
+                "code": "/24 -> 24 ones, then 8 zeros:\n11111111.11111111.11111111.00000000\n255     .255     .255     .0\n\nhost bits = 32 - 24 = 8\naddresses = 2^8 = 256\nusable    = 256 - 2 = 254"
+              },
+              "walkthrough": "Write 24 ones then 8 zeros and convert each octet: the full octets become 255, the empty one becomes 0. Eight host bits give 2^8 = 256 addresses; subtract the reserved network and broadcast addresses for 254 usable.",
+              "narration": "A /24 is the classic example: mask 255.255.255.0, 256 addresses, 254 usable. The minus-two rule accounts for the reserved ends."
+            },
+            {
+              "kind": "diagram",
+              "heading": "Prefix size versus network size",
+              "diagram": {
+                "type": "compare",
+                "title": "Prefix size versus network size",
+                "nodes": ["/8: 16.7M addresses", "/16: 65,534 hosts", "/24: 254 hosts", "/30: 2 hosts"],
+                "note": "A bigger prefix number means a smaller network. /30s connect exactly two routers."
+              },
+              "narration": "Prefix length and network size move in opposite directions. From /8 down to /30, each extra bit halves the network."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: count a /26",
+              "text": "A /26 has 32 - 26 = 6 host bits. How many usable host addresses does it hold? (Answer: 2^6 - 2 = 62.)",
+              "narration": "Compute a /26's usable hosts from the formula. Host bits to the power of two, minus two, is the whole calculation."
+            }
+          ]
+        },
+        {
+          "id": "sub-network-broadcast",
+          "title": "Network and broadcast, by hand",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "Network and broadcast, by hand",
+              "lede": "Given an address and a prefix, you can find the network's first and last address with pencil and paper.",
+              "narration": "This lecture computes network and broadcast addresses by hand using AND logic, plus the common-masks reference table."
+            },
+            {
+              "kind": "bullets",
+              "heading": "The two reserved addresses",
+              "bullets": [
+                "The network address has all host bits set to 0. It names the network itself.",
+                "The broadcast address has all host bits set to 1. It addresses every host at once.",
+                "Compute them by ANDing the IP with the mask, bit by bit: 1 AND 1 = 1, anything else = 0.",
+                "Usable host addresses run from network + 1 to broadcast - 1.",
+                "For /24s the octet math is trivial; the binary method works for every prefix."
+              ],
+              "narration": "Network is host-bits-zero, broadcast is host-bits-one, and ANDing with the mask finds the network. Usable hosts live between the two."
+            },
+            {
+              "kind": "code",
+              "heading": "Worked: 192.168.1.75/24",
+              "code": {
+                "lang": "text",
+                "code": "IP:        192.168.1.75   (host octet 75 = 01001011)\nMask:      255.255.255.0  (host octet  0 = 00000000)\nAND result: 192.168.1.0   <- network address\n\nbroadcast: host bits all 1 -> 192.168.1.255\nusable range: 192.168.1.1 through 192.168.1.254"
+              },
+              "walkthrough": "AND each IP bit with the mask bit: where the mask is 0, the result is 0 regardless. So the host octet becomes 0 and the network is 192.168.1.0. Flip the host bits to 1 for the broadcast: 192.168.1.255. Everything between is usable.",
+              "narration": "ANDing zeroes the host octet to reveal the network address; setting host bits gives the broadcast. The usable range is everything in between."
+            },
+            {
+              "kind": "diagram",
+              "heading": "The AND recipe",
+              "diagram": {
+                "type": "flow",
+                "title": "The AND recipe",
+                "nodes": ["write IP, mask in binary", "AND each bit pair", "host bits to 0: network", "host bits to 1: broadcast"],
+                "note": "AND keeps a 1 only where both bits are 1. Mask zeros erase the host portion."
+              },
+              "narration": "Four steps find any network and broadcast: write both in binary, AND them, then read the network from zeros and the broadcast from ones."
+            },
+            {
+              "kind": "code",
+              "heading": "Common masks reference",
+              "code": {
+                "lang": "text",
+                "code": "/8  255.0.0.0         16,777,214 usable\n/16 255.255.0.0       65,534 usable\n/24 255.255.255.0       254 usable\n/25 255.255.255.128      126 usable\n/26 255.255.255.192       62 usable\n/27 255.255.255.224       30 usable\n/28 255.255.255.240       14 usable\n/30 255.255.255.252        2 usable (router links)"
+              },
+              "walkthrough": "Each row halves the previous network: /25 is half a /24, /26 a quarter, and so on. /30's two usable addresses are exactly enough for a point-to-point link between two routers.",
+              "narration": "This table is worth memorizing from /24 down: each step halves the network, and /30 is the special case for router-to-router links."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: find the network",
+              "text": "Given 10.0.5.200/24, what is the network address? The broadcast? The usable range? (Answers: 10.0.5.0, 10.0.5.255, .1 through .254.)",
+              "narration": "Apply the whole recipe to a new address: network, broadcast, and usable range. If all three come easily, subnetting has clicked."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "logic",
+      "title": "Logic & Sets",
+      "why": "Access rules, firewall policies, database queries, and code conditions are all logic. Sets, truth tables, and De Morgan's laws let you read and simplify them confidently.",
+      "lectures": [
+        {
+          "id": "logic-sets",
+          "title": "Sets and Venn intuition",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "Sets and Venn intuition",
+              "lede": "A set is just a collection of things. Unions, intersections, and complements describe how collections combine.",
+              "narration": "This lecture introduces sets: membership, union, intersection, and complement, with the Venn intuition behind each."
+            },
+            {
+              "kind": "bullets",
+              "heading": "Set vocabulary",
+              "bullets": [
+                "A set is a collection of distinct things: {1, 2, 3} or {red, green, blue}.",
+                "Membership asks is it in there: 2 is in {1, 2, 3}, 5 is not.",
+                "Union (A or B) collects everything in either set, with no duplicates.",
+                "Intersection (A and B) keeps only what is in both sets.",
+                "Complement (not A) is everything outside A, relative to some universe of possibilities."
+              ],
+              "narration": "Sets collect things; union merges, intersection overlaps, complement excludes. These three operations mirror OR, AND, and NOT."
+            },
+            {
+              "kind": "code",
+              "heading": "Worked: combining two sets",
+              "code": {
+                "lang": "text",
+                "code": "A = {1, 2, 3}\nB = {3, 4}\n\nunion:        {1, 2, 3, 4}   (in either)\nintersection: {3}             (in both)\nA without B:  {1, 2}          (in A, not in B)"
+              },
+              "walkthrough": "The union gathers all four distinct numbers. The intersection keeps only 3, the one member they share. Removing B's members from A leaves 1 and 2.",
+              "narration": "Three operations on the same two sets: union gathers, intersection overlaps, difference excludes. Venn diagrams draw exactly these regions."
+            },
+            {
+              "kind": "diagram",
+              "heading": "The three regions",
+              "diagram": {
+                "type": "compare",
+                "title": "The three regions",
+                "nodes": ["union: in A or B", "intersection: in both", "complement: outside A"],
+                "note": "Every WHERE clause, firewall rule, and search filter carves out one of these regions."
+              },
+              "narration": "Picture two overlapping circles: the union is everything covered, the intersection is the overlap, the complement is the rest of the page."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: overlap",
+              "text": "A = {a, b}, B = {b, c}. What is the intersection? The union? (Answers: {b}, {a, b, c}.)",
+              "narration": "Compute an intersection and union by hand. The shared member is the intersection; everything distinct is the union."
+            }
+          ]
+        },
+        {
+          "id": "logic-truth-tables",
+          "title": "AND, OR, NOT and truth tables",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "AND, OR, NOT and truth tables",
+              "lede": "Three little words run all of computing's decisions. Truth tables show exactly what each one means.",
+              "narration": "This lecture defines AND, OR, and NOT with complete truth tables — the reference for every condition you will ever read."
+            },
+            {
+              "kind": "bullets",
+              "heading": "The three operators",
+              "bullets": [
+                "A proposition is a statement that is either true (1) or false (0).",
+                "AND is true only when both sides are true. One false input makes the whole thing false.",
+                "OR is true when at least one side is true. Only false-false gives false.",
+                "NOT flips a value: NOT true is false, NOT false is true.",
+                "A truth table lists every input combination and the result. With two inputs there are exactly four rows."
+              ],
+              "narration": "AND needs both, OR needs at least one, NOT flips. Truth tables enumerate every case so nothing is left to intuition."
+            },
+            {
+              "kind": "code",
+              "heading": "The complete truth tables",
+              "code": {
+                "lang": "text",
+                "code": "A B | A AND B | A OR B | NOT A\n0 0 |    0    |    0   |   1\n0 1 |    0    |    1   |   1\n1 0 |    0    |    1   |   0\n1 1 |    1    |    1   |   0"
+              },
+              "walkthrough": "Read row by row: AND has a single 1, only in the 1-1 row. OR has a single 0, only in the 0-0 row. NOT A ignores B entirely and flips A. Memorizing these three columns pays off forever.",
+              "narration": "Four rows cover every possibility. AND is strict, OR is generous, NOT inverts — and the table proves each claim exhaustively."
+            },
+            {
+              "kind": "diagram",
+              "heading": "Strict versus generous",
+              "diagram": {
+                "type": "compare",
+                "title": "Strict versus generous",
+                "nodes": ["AND: both must be true", "OR: at least one true", "NOT: flips the answer"],
+                "note": "In code, confusing AND with OR is the most common logic bug. The truth table settles it."
+              },
+              "narration": "AND is the strict gatekeeper, OR the generous one, NOT the reverser. When a condition misbehaves, check which operator you actually wrote."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: evaluate",
+              "text": "Let A = 1 (true) and B = 0 (false). What is A AND B? A OR B? NOT B? (Answers: 0, 1, 1.)",
+              "narration": "Evaluate three expressions from the tables. Reading truth tables fluently is the prerequisite for everything that follows."
+            }
+          ]
+        },
+        {
+          "id": "logic-demorgan",
+          "title": "De Morgan's laws",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "De Morgan's laws",
+              "lede": "Negating a combination flips the combination: the opposite of both is at least one failing.",
+              "narration": "This lecture proves De Morgan's laws with a worked example and shows where they simplify real conditions."
+            },
+            {
+              "kind": "bullets",
+              "heading": "The two laws",
+              "bullets": [
+                "NOT (A AND B) equals (NOT A) OR (NOT B). The opposite of both is: at least one fails.",
+                "NOT (A OR B) equals (NOT A) AND (NOT B). The opposite of either is: both fail.",
+                "The pattern: distribute the NOT to each side, and flip AND to OR (or OR to AND).",
+                "Intuition: to deny both raining and cold, you only need one of them to be false.",
+                "These laws simplify negated conditions in code, queries, and firewall rules."
+              ],
+              "narration": "De Morgan's laws push NOT inside parentheses by flipping the operator. The weather intuition — denying both needs only one failure — makes them memorable."
+            },
+            {
+              "kind": "code",
+              "heading": "Worked: verifying the first law",
+              "code": {
+                "lang": "text",
+                "code": "let A = 1, B = 0\n\nleft side:  NOT (A AND B) = NOT (1 AND 0)\n                          = NOT 0 = 1\n\nright side: (NOT A) OR (NOT B) = 0 OR 1 = 1\n\nboth sides = 1: the law holds for this row\n(check the other three rows the same way)"
+              },
+              "walkthrough": "Evaluate both sides with A true and B false. The left side negates the AND; the right side negates each input and ORs them. Both give 1. Repeating for the other three rows completes the proof.",
+              "narration": "A truth-table check on one row shows the mechanics; all four rows prove the law. Verification beats memorization."
+            },
+            {
+              "kind": "diagram",
+              "heading": "The flip pattern",
+              "diagram": {
+                "type": "compare",
+                "title": "The flip pattern",
+                "nodes": ["NOT (A AND B)", "push NOT in, flip AND"],
+                "note": "Push the NOT inward, flip the operator. That is the entire law in one move."
+              },
+              "narration": "One move encodes the law: NOT crosses the parentheses and AND becomes OR. The second law is the mirror image."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: simplify",
+              "text": "Simplify NOT (x > 5 AND y < 3) using De Morgan's law. (Answer: x <= 5 OR y >= 3. Negating > gives <=, negating < gives >=, AND becomes OR.)",
+              "narration": "Apply the law to a real code condition: negate each comparison and flip AND to OR. This is exactly how professionals simplify tangled conditions."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stats",
+      "title": "Statistics Foundations",
+      "why": "Mean, median, variance, and distributions are the language of data. Every data, analytics, and ML path leans on these ideas daily.",
+      "lectures": [
+        {
+          "id": "stats-central",
+          "title": "Mean, median, and mode",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "Mean, median, and mode",
+              "lede": "Three ways to say typical — and they disagree exactly when the disagreement matters most.",
+              "narration": "This lecture defines the three averages, works them on one dataset, and shows when each one lies."
+            },
+            {
+              "kind": "bullets",
+              "heading": "Three typicals",
+              "bullets": [
+                "The mean is the sum divided by the count: the familiar average.",
+                "The median is the middle value when the data is sorted. Half the values sit above it, half below.",
+                "The mode is the most frequent value: the winner of the popularity contest.",
+                "The mean is sensitive to outliers: one billionaire in the room makes the average salary absurd.",
+                "The median resists outliers, which is why incomes and house prices are reported as medians."
+              ],
+              "narration": "Mean averages, median middles, mode repeats. Outliers drag the mean but barely touch the median — which is why the choice of average is a real decision."
+            },
+            {
+              "kind": "code",
+              "heading": "Worked: one dataset, three answers",
+              "code": {
+                "lang": "text",
+                "code": "data: 2, 4, 4, 4, 5, 7, 9\n\nsum = 2+4+4+4+5+7+9 = 35\nmean = 35 / 7 = 5\n\nsorted: 2, 4, 4, 4, 5, 7, 9\nmedian = 4  (the middle of 7 values)\n\nmode = 4  (appears 3 times, more than any other)"
+              },
+              "walkthrough": "Add all seven values for 35, divide by 7 for a mean of 5. The sorted list's middle value is the fourth one: 4. The value 4 appears three times, more than any other, so it is the mode.",
+              "narration": "One dataset, three summaries: mean 5, median 4, mode 4. Computing all three on the same numbers shows how each summarizes differently."
+            },
+            {
+              "kind": "diagram",
+              "heading": "Which average when",
+              "diagram": {
+                "type": "compare",
+                "title": "Which average when",
+                "nodes": ["mean: sensitive to outliers", "median: robust middle", "mode: most common value"],
+                "note": "Skewed data? Trust the median. Categories? The mode. Clean symmetric data? The mean."
+              },
+              "narration": "Match the average to the data's shape: the mean for clean symmetric data, the median for skewed data, the mode for categories."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: the outlier test",
+              "text": "Data: 1, 2, 3, 100. Compute the mean and the median. Which one better represents a typical value? (Mean 26.5, median 2.5 — the median wins.)",
+              "narration": "One outlier, two very different answers. Feeling the mean get dragged while the median holds steady teaches more than any definition."
+            }
+          ]
+        },
+        {
+          "id": "stats-spread",
+          "title": "Variance and standard deviation",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "Variance and standard deviation",
+              "lede": "Averages say where data centers. Spread says how much it wanders — and wandering is often the interesting part.",
+              "narration": "This lecture measures spread: deviations from the mean, variance, and standard deviation, with a full worked example."
+            },
+            {
+              "kind": "bullets",
+              "heading": "Measuring spread",
+              "bullets": [
+                "A deviation is how far one value sits from the mean: value minus mean.",
+                "Deviations cancel out when added (positives balance negatives), so we square each one first.",
+                "Variance is the average of the squared deviations: the typical squared distance from the mean.",
+                "Standard deviation is the square root of variance. It restores the original units.",
+                "Bigger standard deviation means more spread: the data is less predictable."
+              ],
+              "narration": "Spread is built in four steps: deviations, squares, average, square root. Squaring stops cancellation; rooting restores units."
+            },
+            {
+              "kind": "code",
+              "heading": "Worked: spread of 2,4,4,4,5,7,9",
+              "code": {
+                "lang": "text",
+                "code": "mean = 5 (from last lecture)\n\ndeviations:  -3, -1, -1, -1, 0, 2, 4\nsquared:      9,  1,  1,  1, 0, 4, 16\nsum of squares = 32\nvariance = 32 / 7 = 4.57\nstddev = sqrt(4.57) = 2.14"
+              },
+              "walkthrough": "Subtract the mean 5 from each value for the deviations. Square each: negatives become positive. Sum the squares (32), divide by 7 for variance (4.57), and take the square root for a standard deviation of about 2.14.",
+              "narration": "Every step shown: deviations, squares, average, root. A standard deviation of 2.14 means typical values wander about two units from the mean."
+            },
+            {
+              "kind": "diagram",
+              "heading": "The spread recipe",
+              "diagram": {
+                "type": "flow",
+                "title": "The spread recipe",
+                "nodes": ["find the mean", "subtract: deviations", "square each", "average: variance", "square root: stddev"],
+                "note": "Squaring stops positives and negatives cancelling. The root converts squared units back to real ones."
+              },
+              "narration": "Five steps turn raw data into a spread measurement. Each step fixes a problem the previous one created."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: zero spread",
+              "text": "Data: 5, 5, 5, 5. What is the mean? What is the standard deviation? (Mean 5, stddev 0 — no wandering at all.)",
+              "narration": "The extreme case teaches the concept: identical values have zero spread. If your calculation gives anything else, recheck the steps."
+            }
+          ]
+        },
+        {
+          "id": "stats-distributions",
+          "title": "Distributions: the shape of data",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "Distributions: the shape of data",
+              "lede": "A distribution is the shape data makes when you pile it up. Shape tells you which statistics to trust.",
+              "narration": "This lecture introduces distributions: the normal bell curve, skew, and uniform shapes, and why shape guides analysis."
+            },
+            {
+              "kind": "bullets",
+              "heading": "Shapes of data",
+              "bullets": [
+                "A distribution shows how values spread out: which values are common, which are rare.",
+                "The normal distribution is the famous bell curve: symmetric, with most values near the middle.",
+                "Heights, measurement errors, and test scores often look roughly normal.",
+                "Skewed distributions have a long tail on one side. Incomes skew right: a few huge values stretch the tail.",
+                "In a right-skewed distribution, the mean exceeds the median — the tail drags the average up."
+              ],
+              "narration": "Distributions are data's silhouette: bell curves for symmetric data, skewed tails when outliers stretch one side, flat lines when everything is equally likely."
+            },
+            {
+              "kind": "code",
+              "heading": "A histogram, drawn",
+              "code": {
+                "lang": "text",
+                "code": "value range | count\n 1 - 3      | ##\n 4 - 6      | ######\n 7 - 9      | ####\n10 - 12     | ##\n\nsymmetric pile: most values in the middle,\nfew at the edges -> roughly normal shape"
+              },
+              "walkthrough": "Each # is a data point in that range. The pile is tallest in the middle ranges and tapers at both ends — the silhouette of a bell curve drawn with text.",
+              "narration": "This text histogram shows a bell shape emerging from raw counts. Reading shapes from histograms is a daily data skill."
+            },
+            {
+              "kind": "diagram",
+              "heading": "Three shapes",
+              "diagram": {
+                "type": "compare",
+                "title": "Three shapes",
+                "nodes": ["normal: bell, symmetric", "skewed: tail pulls the mean", "uniform: flat, all equal"],
+                "note": "Shape tells you which average to trust: symmetric takes the mean, skewed takes the median."
+              },
+              "narration": "Three archetypes cover most real data: the bell, the skewed tail, and the flat uniform. Name the shape before choosing the statistic."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: pick the average",
+              "text": "Salaries at a company include one billionaire founder. Should the typical salary be reported as the mean or the median? Why?",
+              "narration": "Apply shape thinking to a real reporting choice: the skewed tail demands the median. This judgment call appears in every data role."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "probability",
+      "title": "Probability",
+      "why": "Uncertainty is everywhere in data, ML, and security: test accuracy, model confidence, risk estimates. Sample spaces, independence, and Bayes' rule make uncertainty calculable.",
+      "lectures": [
+        {
+          "id": "prob-spaces",
+          "title": "Sample spaces and independent events",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "Sample spaces and independent events",
+              "lede": "Probability is counting: favorable outcomes over possible outcomes. List the possibilities and the math follows.",
+              "narration": "This lecture defines sample spaces and events, computes simple probabilities, and multiplies independent events."
+            },
+            {
+              "kind": "bullets",
+              "heading": "Probability basics",
+              "bullets": [
+                "A sample space is the set of all possible outcomes of an experiment.",
+                "An event is a subset of the sample space: the outcomes you care about.",
+                "Probability = favorable outcomes divided by total outcomes (when all are equally likely).",
+                "Independent events do not affect each other: one coin flip never remembers the last.",
+                "For independent events, P(A and B) = P(A) x P(B). Multiply the chances."
+              ],
+              "narration": "Probability is disciplined counting: list every outcome, count the ones you want, divide. Independence lets you multiply."
+            },
+            {
+              "kind": "code",
+              "heading": "Worked: two coin flips",
+              "code": {
+                "lang": "text",
+                "code": "sample space: HH, HT, TH, TT  (4 outcomes)\n\nP(two heads) = 1 / 4\nP(at least one head) = 3 / 4   (HT, TH, HH)\n\nindependent check:\nP(head then head) = 1/2 x 1/2 = 1/4  (matches)"
+              },
+              "walkthrough": "List all four outcomes first — that is the sample space. Two heads is one of four: probability 1/4. At least one head covers three of four: 3/4. Multiplying the independent single-flip chances gives the same 1/4, confirming independence.",
+              "narration": "Two methods agree: counting outcomes and multiplying independent chances. When both give 1/4, the model is consistent."
+            },
+            {
+              "kind": "diagram",
+              "heading": "Counting probability",
+              "diagram": {
+                "type": "hierarchy",
+                "title": "Counting probability",
+                "nodes": ["sample space: all outcomes", "event: the ones you want", "probability: want / all"],
+                "note": "Every probability problem starts by listing the sample space. Skip that step and the counting goes wrong."
+              },
+              "narration": "The hierarchy of probability: enumerate everything, isolate what you want, divide. Listing first prevents the classic miscounts."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: dice",
+              "text": "A fair six-sided die: what is P(rolling a 6)? What is P(rolling two sixes in a row)? (Answers: 1/6, 1/36.)",
+              "narration": "Apply counting and independence to dice. The 1/36 shows how fast combined chances shrink."
+            }
+          ]
+        },
+        {
+          "id": "prob-bayes",
+          "title": "Bayes' rule, intuitively",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "Bayes' rule, intuitively",
+              "lede": "Evidence should update your beliefs — but by how much? Bayes' rule does the accounting, and base rates dominate.",
+              "narration": "This lecture builds Bayes' intuition with the classic medical-test example, worked with real numbers."
+            },
+            {
+              "kind": "bullets",
+              "heading": "Updating beliefs",
+              "bullets": [
+                "The prior is what you believed before the evidence: how common the condition is.",
+                "The evidence is what you observed: a positive test, an alert, a symptom.",
+                "The posterior is the updated belief: how likely the condition is, given the evidence.",
+                "Rare conditions make most positives false, even with accurate tests. Base rates dominate.",
+                "Bayes' rule powers spam filters, medical diagnosis, and fraud detection."
+              ],
+              "narration": "Prior belief meets evidence and becomes posterior belief. The surprise is how much the prior — the base rate — controls the answer."
+            },
+            {
+              "kind": "code",
+              "heading": "Worked: the 99%-accurate test",
+              "code": {
+                "lang": "text",
+                "code": "1000 people, 1% have the condition, test 99% accurate\n\nsick:    10 people -> true positives:  10 x 0.99 = 10\nhealthy: 990      -> false positives: 990 x 0.01 = 10\n\npositive test -> P(sick) = 10 / (10 + 10) = 50%\n\na 99%-accurate test is a coin flip here.\nbase rates dominate."
+              },
+              "walkthrough": "Out of 1000 people, 10 are sick and nearly all test positive: 10 true positives. Of the 990 healthy, 1% falsely test positive: about 10 false positives. So a positive result comes from 20 people, only 10 of them sick: 50%.",
+              "narration": "The arithmetic shocks everyone: a 99%-accurate test is a coin flip when the condition is rare. Counting people instead of trusting percentages reveals why."
+            },
+            {
+              "kind": "diagram",
+              "heading": "Prior to posterior",
+              "diagram": {
+                "type": "flow",
+                "title": "Prior to posterior",
+                "nodes": ["prior: 1% sick", "evidence: positive test", "posterior: 50% sick"],
+                "note": "Evidence moved belief from 1% to 50% — a huge update, yet still far from certain."
+              },
+              "narration": "The test moved the needle enormously — from 1% to 50% — but certainty never arrived. That gap is the base rate talking."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: raise the base rate",
+              "text": "Same test, but now 50% of 1000 people are sick. Recompute: true positives = 500 x 0.99 = 495, false positives = 500 x 0.01 = 5. What is P(sick) given a positive test now?",
+              "narration": "Rerun the arithmetic with a 50% base rate and watch the posterior jump to 99%. The test did not change — the prior did."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "linalg",
+      "title": "Linear Algebra Essentials",
+      "why": "Machine learning is linear algebra at scale: data as vectors, transformations as matrices, and the dot product inside every neuron. These essentials demystify ML math.",
+      "lectures": [
+        {
+          "id": "la-vectors-matrices",
+          "title": "Vectors and matrices",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "Vectors and matrices",
+              "lede": "A vector is a list of numbers; a matrix is a grid of them. Together they are how ML holds data.",
+              "narration": "This lecture defines scalars, vectors, and matrices, and shows how data becomes vectors."
+            },
+            {
+              "kind": "bullets",
+              "heading": "The three containers",
+              "bullets": [
+                "A scalar is a single number: 5, -3.2, 0. It has magnitude but no direction.",
+                "A vector is an ordered list of numbers: [3, 4]. Order matters: [3, 4] is not [4, 3].",
+                "The dimension is how many numbers a vector holds. [3, 4] is 2-dimensional.",
+                "A matrix is a rectangular grid of numbers with rows and columns. Its shape is rows x columns.",
+                "In ML, one data point is often one vector: [height, weight, age] is a 3-dimensional description of a person."
+              ],
+              "narration": "Scalars are single numbers, vectors are ordered lists, matrices are grids. Machine learning stores data points as vectors and datasets as matrices."
+            },
+            {
+              "kind": "code",
+              "heading": "Vectors and matrices, written",
+              "code": {
+                "lang": "text",
+                "code": "vector v = [3, 4]          (2 dimensions)\n\nmatrix M = [[1, 2],\n            [3, 4]]        (2 rows x 2 columns)\n\nperson = [68, 150, 34]    (height, weight, age)"
+              },
+              "walkthrough": "The vector v holds two numbers, so it is 2-dimensional. The matrix M has two rows and two columns: shape 2x2. The person vector packs three measurements into one ordered list — the standard ML encoding of a data point.",
+              "narration": "Read the shapes: vector length is dimension, matrix shape is rows-by-columns. Encoding a person as [68, 150, 34] is exactly what datasets do."
+            },
+            {
+              "kind": "diagram",
+              "heading": "Climbing the containers",
+              "diagram": {
+                "type": "hierarchy",
+                "title": "Climbing the containers",
+                "nodes": ["scalar: one number", "vector: list of numbers", "matrix: grid of numbers"],
+                "note": "Each level organizes more data. A dataset is a matrix whose rows are data-point vectors."
+              },
+              "narration": "Each container nests the last: numbers into lists, lists into grids. A dataset is a matrix of row-vectors, one per data point."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: name the shape",
+              "text": "What is the shape of [[1, 2, 3], [4, 5, 6]]? How many dimensions does the vector [7, 8, 9, 10] have? (Answers: 2x3, four.)",
+              "narration": "Read shapes from notation: count rows and columns for matrices, count entries for vector dimension."
+            }
+          ]
+        },
+        {
+          "id": "la-dot-product",
+          "title": "The dot product and why ML cares",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "The dot product and why ML cares",
+              "lede": "Multiply pairs, add them up: the dot product is simple arithmetic that powers similarity, projections, and neural networks.",
+              "narration": "This lecture works a dot product by hand and explains why this one operation sits at the heart of machine learning."
+            },
+            {
+              "kind": "bullets",
+              "heading": "The dot product",
+              "bullets": [
+                "The dot product takes two same-length vectors and returns a single number.",
+                "Recipe: multiply matching pairs, then add the products.",
+                "It measures alignment: large when vectors point the same way, zero when perpendicular, negative when opposed.",
+                "A neural network neuron is mostly dot products: inputs dotted with weights, plus a twist.",
+                "Similarity search, recommendations, and attention mechanisms all lean on dot products."
+              ],
+              "narration": "Pairwise multiply, then sum: the dot product compresses two vectors into one alignment score. Neurons are built from it."
+            },
+            {
+              "kind": "code",
+              "heading": "Worked: [1,2,3] dot [4,5,6]",
+              "code": {
+                "lang": "text",
+                "code": "a = [1, 2, 3]\nb = [4, 5, 6]\n\na . b = 1x4 + 2x5 + 3x6\n      = 4 + 10 + 18\n      = 32"
+              },
+              "walkthrough": "Pair the first entries: 1x4 = 4. Pair the seconds: 2x5 = 10. Pair the thirds: 3x6 = 18. Add the three products: 4 + 10 + 18 = 32. The two vectors collapse to the single number 32.",
+              "narration": "Three multiplications and one addition: the dot product of [1,2,3] and [4,5,6] is 32. Every neuron performs this same ritual thousands of times."
+            },
+            {
+              "kind": "diagram",
+              "heading": "Dot product, visualized",
+              "diagram": {
+                "type": "flow",
+                "title": "Dot product, visualized",
+                "nodes": ["pair up entries", "multiply each pair", "add the products", "one number out"],
+                "note": "Two vectors in, one alignment score out. That score is what neurons, search, and attention all consume."
+              },
+              "narration": "The dot product is a funnel: two vectors enter, pairwise products form, and a single score exits. Machine learning runs on funnels like this."
+            },
+            {
+              "kind": "bullets",
+              "heading": "Common pitfalls",
+              "bullets": [
+                "Mismatched lengths. The dot product needs equal-length vectors; [1,2] dot [3,4,5] is undefined.",
+                "Expecting a vector back. The dot product returns a single scalar, not another vector.",
+                "Forgetting order does not matter here: a . b equals b . a. (Matrix multiplication is pickier.)",
+                "Confusing dot product with element-wise multiply, which keeps a vector of the pairwise products."
+              ],
+              "narration": "The usual mistakes: mismatched lengths, expecting a vector result, and confusing the dot product with element-wise multiplication."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: compute one",
+              "text": "Compute [2, 3] dot [5, 7] by hand. (Answer: 2x5 + 3x7 = 10 + 21 = 31.) Then say in one sentence what a large dot product means.",
+              "narration": "Compute a dot product yourself and interpret it: large means aligned. Arithmetic plus meaning is the complete skill."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

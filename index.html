@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="dark" />
+<meta name="description" content="CC: security principles, access control, incident response" />
+<title>ISC2 Certified in Cybersecurity — Certification Bootcamp · Interstitium Labs</title>
+<link rel="stylesheet" href="engine/style.css" />
+<style>:root{--accent:#35c48d;--accent-soft:rgba(53,196,141,.10);--accent-ink:#052e1e;}</style>
+<script>
+/* Runtime contract for engine/bootcamp.js */
+window.BOOTCAMP_PAGE = {
+  slug: "isc2-cc",
+  hubUrl: "https://interstitiumlabs.dev/bootcamps/",
+  title: "ISC2 Certified in Cybersecurity"
+};
+</script>
+<script src="engine/bootcamp.js" defer></script>
+<script src="engine/terminal.js" defer></script>
+<script src="engine/learn.js" defer></script>
+<script src="engine/labs.js" defer></script>
+<script src="engine/simulations.js" defer></script>
+<script src="engine/consoles.js" defer></script>
+<script src="engine/missions.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="shell">
+
+  <header class="topbar">
+    <a class="brand" href="https://interstitiumlabs.dev/bootcamps/">INTERSTITIUM&nbsp;LABS · BOOTCAMPS</a>
+    <nav class="nav" aria-label="Bootcamp sections">
+      <button data-view="dashboard" class="active">Dashboard</button>
+      <button data-view="learn">Learn</button>
+      <button data-view="workbench">Drill</button>
+      <button data-view="terminal">Terminal</button>
+      <button data-view="labs">Labs</button>
+      <button data-view="exercises">Exercises</button>
+      <button data-view="console">Console</button>
+      <button data-view="missions">Missions</button>
+      <button data-view="resources">Resources</button>
+      <button data-view="simulation">Simulation</button>
+      <button data-view="behavioral">Behavioral</button>
+      <a class="navlink" href="./chat/">Chat companion →</a>
+    </nav>
+    <div class="session-pill" aria-hidden="true"><span class="dot"></span>LOCAL SESSION</div>
+  </header>
+
+  <main id="main">
+    <!-- ============ HERO ============ -->
+    <section class="hero" aria-labelledby="heroTitle">
+      <div class="hero-copy">
+        <p class="kicker">CERTIFICATION BOOTCAMP · <span id="heroVendor">ISC2 · Certified in Cybersecurity (CC)</span></p>
+        <h1 id="heroTitle">ISC2 Certified in Cybersecurity</h1>
+        <p class="lede" id="heroTagline">CC: security principles, access control, incident response</p>
+        <div class="cta-row">
+          <button class="btn primary" id="startAdaptive">Begin adaptive drill →</button>
+          <button class="btn secondary" id="gotoSim">Timed simulation</button>
+          <a class="btn ghost" href="./chat/">Chat companion</a>
+        </div>
+        <p class="disclaimer" id="heroDisclaimer">Independent practice material by Interstitium Labs. Not affiliated with, endorsed by, or sponsored by ISC2. Confers no certificate. All scenarios are original; no exam content is reproduced.</p>
+      </div>
+      <aside class="hero-panel" aria-label="Bootcamp facts">
+        <div class="mission-label"><span>PATH BRIEF</span><span id="heroSlug">isc2-cc</span></div>
+        <div class="mission-grid">
+          <div class="metric"><strong id="statScenarios">35</strong><span>scored scenarios</span></div>
+          <div class="metric"><strong id="statDomains">5</strong><span>domains</span></div>
+          <div class="metric"><strong id="statSim">60</strong><span>simulation minutes</span></div>
+          <div class="metric"><strong>0</strong><span>servers — runs offline</span></div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- ============ DASHBOARD ============ -->
+    <section class="view active" id="view-dashboard" aria-label="Dashboard">
+      <div class="status-strip">
+        <div class="status-cell">
+          <div class="status-label">OVERALL MASTERY</div>
+          <div class="status-value" id="overallPct">0%</div>
+          <div class="bar"><i id="overallBar"></i></div>
+        </div>
+        <div class="status-cell">
+          <div class="status-label">SCENARIOS CLEARED</div>
+          <div class="status-value" id="clearedCount">0</div>
+          <div class="bar"><i id="clearedBar"></i></div>
+        </div>
+        <div class="status-cell">
+          <div class="status-label">READINESS</div>
+          <div class="status-value" id="readinessLabel">BASELINE</div>
+          <div class="status-label" style="margin-top:8px">WEAKEST DOMAIN</div>
+          <div class="status-value" style="font-size:14px" id="nextPriority">—</div>
+          <div class="bar"><i id="nextBar"></i></div>
+        </div>
+      </div>
+
+      <div class="wrap">
+        <div class="readiness-grid">
+          <div class="panel next-panel" id="nextPanel" aria-live="polite"></div>
+          <aside class="panel mastery" aria-label="Mastery by domain">
+            <h3>Mastery by domain</h3>
+            <div id="masteryRows"></div>
+          </aside>
+        </div>
+      </div>
+
+      <div class="wrap">
+        <div class="section-head">
+          <div><p class="eyebrow">SCENARIO LIBRARY</p><h2>Train the whole path</h2></div>
+          <p>Filter to a domain to drill it in isolation, or let the adaptive queue hunt your weakest domain first.</p>
+        </div>
+        <div class="filter-row" id="filters" role="group" aria-label="Filter scenarios by domain"></div>
+        <div class="lab-grid" id="labGrid"></div>
+        <div class="reset-row">
+          <button class="btn small ghost" id="resetProgress">Reset all progress</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ WORKBENCH (drill) ============ -->
+    <section class="view" id="view-workbench" aria-label="Adaptive drill">
+      <div class="workbench-shell">
+        <aside class="lab-rail" aria-label="Drill queue">
+          <h2>Drill queue</h2>
+          <div class="rail-list" id="railList"></div>
+        </aside>
+        <div class="wb">
+          <p class="wb-eyebrow" id="wbEyebrow"></p>
+          <h2 id="wbTitle"></h2>
+          <p class="wb-desc" id="wbDesc"></p>
+          <div class="objectives"><p>OBJECTIVES</p><ul id="wbObjectives"></ul></div>
+          <div class="situation" id="wbSituation"></div>
+          <div class="evidence-bar" id="evidenceButtons" role="group" aria-label="Evidence sources"></div>
+          <div class="terminal" id="terminal" aria-live="polite"></div>
+          <p class="decision-prompt" id="decisionPrompt"></p>
+          <div class="choices" id="choices" role="group" aria-label="Answer choices"></div>
+          <div class="hint-text" id="hintText" role="status"></div>
+          <div class="feedback" id="feedback"></div>
+          <div class="action-row">
+            <button class="btn small ghost" id="hintBtn">💡 Hint</button>
+            <button class="btn primary" id="submitChoice" disabled>Submit answer</button>
+            <button class="btn small ghost" id="skipItem">Skip →</button>
+            <button class="btn primary" id="nextItem" style="display:none">Next scenario →</button>
+            <span class="bench-timer" id="benchTimer" aria-label="Time on this scenario">00:00</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ LEARN ============ -->
+    <section class="view" id="view-learn" aria-label="Learn">
+      <div class="wrap">
+        <div class="view-head">
+          <p class="eyebrow">INTERSTITIUM LABS · STUDY HALL</p>
+          <h2>Learn the concepts</h2>
+          <p>One lesson per domain, distilled from the practice scenarios. Read first, then drill — every lesson ends in the terminal.</p>
+        </div>
+        <div id="learnBody" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- ============ TERMINAL ============ -->
+    <section class="view" id="view-terminal" aria-label="Terminal">
+      <div class="wrap">
+        <div class="view-head">
+          <p class="eyebrow">INTERSTITIUM LABS · HANDS-ON</p>
+          <h2>Terminal</h2>
+          <p>A simulated shell for this path — practice commands safely. Everything runs locally; no real systems are touched.</p>
+        </div>
+        <div id="terminalBody"></div>
+      </div>
+    </section>
+
+    <!-- ============ LABS ============ -->
+    <section class="view" id="view-labs" aria-label="Labs">
+      <div class="wrap">
+        <div class="view-head">
+          <p class="eyebrow">INTERSTITIUM LABS · GUIDED PRACTICE</p>
+          <h2>Hands-on labs</h2>
+          <p>Follow the steps, run the commands in the Terminal tab — checks validate your work automatically.</p>
+        </div>
+        <div id="labsBody" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- ============ EXERCISES ============ -->
+    <section class="view" id="view-exercises" aria-label="Exercises">
+      <div class="wrap">
+        <div class="view-head">
+          <p class="eyebrow">INTERSTITIUM LABS · SCENARIO PRACTICE</p>
+          <h2>Interactive exercises</h2>
+          <p>Diagnose, decide, order, and audit — hands-on scenarios with instant scoring. Everything runs locally; no real systems are touched.</p>
+        </div>
+        <div id="exercisesBody" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- ============ CONSOLE ============ -->
+    <section class="view" id="view-console" aria-label="Simulated console">
+      <div class="wrap">
+        <div class="view-head">
+          <p class="eyebrow">INTERSTITIUM LABS · SANDBOX</p>
+          <h2>Simulated console</h2>
+          <p>Practice in a faithful replica of the real console — a local sandbox. Nothing here touches real systems or accounts.</p>
+        </div>
+        <div id="consoleBody" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- ============ MISSIONS ============ -->
+    <section class="view" id="view-missions" aria-label="Terminal missions">
+      <div class="wrap">
+        <div class="view-head">
+          <p class="eyebrow">INTERSTITIUM LABS · HANDS-ON</p>
+          <h2>Terminal missions</h2>
+          <p>Structured objectives to complete in the simulated Terminal — checks validate your commands automatically.</p>
+        </div>
+        <div id="missionsBody" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- ============ RESOURCES ============ -->
+    <section class="view" id="view-resources" aria-label="Resources">
+      <div class="wrap">
+        <div class="view-head">
+          <p class="eyebrow">INTERSTITIUM LABS · REFERENCE SHELF</p>
+          <h2>Resources</h2>
+          <p>Cheat sheet, glossary, official references, and a readiness checklist for this path.</p>
+        </div>
+        <div id="resourcesBody" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- ============ SIMULATION ============ -->
+    <section class="view" id="view-simulation" aria-label="Timed simulation">
+      <div class="wrap sim-shell">
+        <div id="simLanding">
+          <p class="eyebrow">FINAL EVOLUTION</p>
+          <h2 style="font-size:clamp(28px,4vw,44px);letter-spacing:-.04em;margin:0 0 12px">Prove it under pressure</h2>
+          <p style="color:var(--muted);max-width:640px">A timed run across every domain, weighted toward your weakest areas. Hints are disabled and each decision is final — exactly like the real thing.</p>
+          <div class="mission-grid" style="max-width:560px;margin:22px 0">
+            <div class="metric"><strong id="simStatItems">–</strong><span>scenarios</span></div>
+            <div class="metric"><strong id="simStatMins">–</strong><span>minutes</span></div>
+            <div class="metric"><strong id="simStatDomains">–</strong><span>domains</span></div>
+          </div>
+          <div class="cta-row"><button class="btn primary" id="openSim">Stage the simulation →</button></div>
+        </div>
+        <div id="simActive" style="display:none">
+          <div class="action-row" style="justify-content:space-between">
+            <div><p class="wb-eyebrow" id="simEyebrow"></p><h2 id="simTitle" style="margin:0"></h2></div>
+            <div style="text-align:right"><div class="sim-timer" id="simTimer">0:00</div>
+            <div class="status-label" id="simProgress"></div></div>
+          </div>
+          <div class="situation" id="simSituation"></div>
+          <div class="evidence-bar" id="simEvidence" role="group" aria-label="Evidence sources"></div>
+          <div class="terminal" id="simTerminal" aria-live="polite"></div>
+          <p class="decision-prompt" id="simPrompt"></p>
+          <div class="choices" id="simChoices" role="group" aria-label="Answer choices"></div>
+          <div class="action-row">
+            <button class="btn primary" id="simSubmit" disabled>Lock in answer</button>
+            <button class="btn small ghost" id="simNext" style="display:none">Next →</button>
+            <button class="btn small ghost" id="endSimEarly">End run early</button>
+          </div>
+        </div>
+        <div id="simResults" style="display:none"></div>
+      </div>
+    </section>
+
+    <!-- ============ BEHAVIORAL ============ -->
+    <section class="view" id="view-behavioral" aria-label="Behavioral prep">
+      <div class="wrap">
+        <div class="section-head">
+          <div><p class="eyebrow">BEHAVIORAL PREP</p><h2>Answer like a story</h2></div>
+          <p>Technical skill gets you the interview; stories get you the offer. Structure every answer with STAR, quantify the result, and name the lesson.</p>
+        </div>
+        <div class="star-grid" id="starGrid"></div>
+        <div class="beh-list" id="behList"></div>
+      </div>
+    </section>
+
+    <!-- ============ CHAT PROMO ============ -->
+    <div class="wrap">
+      <div class="chat-promo">
+        <div>
+          <h3>Prefer to talk it through?</h3>
+          <p>The chat companion runs mock-assessment rounds with keyword-based coaching — hints, model points, and a full debrief. Everything runs locally in your browser.</p>
+        </div>
+        <a class="btn primary" href="./chat/">Open chat companion →</a>
+      </div>
+    </div>
+  </main>
+
+  <div class="modal" id="simModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div>
+      <p class="eyebrow">FINAL EVOLUTION</p>
+      <h2 id="modalTitle">Start the run?</h2>
+      <p id="modalDesc" style="color:var(--muted)"></p>
+      <div class="action-row" style="margin-top:18px">
+        <button class="btn ghost" id="cancelSim">Not yet</button>
+        <button class="btn primary" id="startSim">Start simulation</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <footer class="footer">
+    <span>Interstitium Labs · Certification Bootcamps · built 2026-10-06</span>
+    <nav aria-label="Bootcamp navigation">
+      <a href="https://interstitiumlabs.dev/bootcamps/cisco-ccna/">← Cisco CCNA</a>
+      <a href="https://interstitiumlabs.dev/bootcamps/">← All bootcamps</a>
+      <a href="https://interstitiumlabs.dev/bootcamps/m365-endpoint-admin/">→ Microsoft 365 Endpoint Administrator</a>
+    </nav>
+  </footer>
+</div>
+</body>
+</html>

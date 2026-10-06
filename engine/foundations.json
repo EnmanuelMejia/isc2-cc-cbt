@@ -1,0 +1,2143 @@
+{
+  "tracks": [
+    {
+      "id": "cli-basics",
+      "title": "Command Line Basics",
+      "audience": "Complete beginners who have never opened a terminal window. Start here if typing commands to a computer is new to you.",
+      "lectures": [
+        {
+          "id": "cli-meet-terminal",
+          "title": "Meet the terminal",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "Meet the terminal",
+              "lede": "The command line looks intimidating, but it is just a faster way to talk to your computer — in words instead of clicks.",
+              "narration": "Welcome to the command line. In this lecture you will learn what a terminal is, what a shell is, and run your first three commands."
+            },
+            {
+              "kind": "bullets",
+              "heading": "What a command line is",
+              "bullets": [
+                "A terminal is a text window where you type commands instead of clicking buttons and menus.",
+                "A shell is the program inside the terminal that reads your commands and runs them. On Linux and macOS it is usually bash or zsh; on Windows it is PowerShell.",
+                "You type a command, press Enter, and the computer prints its answer back as text.",
+                "Almost everything you can do by clicking — opening files, creating folders, running programs — can also be done by typing.",
+                "You do not need to memorize hundreds of commands. Five or six cover most everyday work."
+              ],
+              "narration": "A terminal is a text window, and the shell inside it runs your typed commands. Typing plus Enter is the whole interaction model, and a handful of commands covers most daily work."
+            },
+            {
+              "kind": "diagram",
+              "heading": "Anatomy of a command",
+              "diagram": {
+                "type": "hierarchy",
+                "title": "Anatomy of a command",
+                "nodes": ["ls", "command name: what to run", "-l", "flag: how to run it", "/home/alex", "argument: what to act on"],
+                "note": "Most commands follow one pattern: name, then options starting with a dash, then the thing to act on — all separated by spaces."
+              },
+              "narration": "Nearly every command has the same shape: a name, optional flags that start with a dash, and an argument naming the target. Learning this pattern once makes every new command easier to read."
+            },
+            {
+              "kind": "code",
+              "heading": "Your first three commands",
+              "code": {
+                "lang": "shell",
+                "code": "$ whoami\nalex\n\n$ date\nSun Oct  4 11:52:00 EDT 2026\n\n$ echo hello\nhello"
+              },
+              "walkthrough": "whoami prints your username. date prints the current date and time. echo repeats whatever you type after it. The $ is the prompt — the shell prints it to say it is ready, and you never type it yourself.",
+              "narration": "Three safe commands to start with: whoami tells you who you are, date tells you the time, and echo repeats your words. The dollar sign is the shell's prompt, not something you type."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: say hello",
+              "text": "Open a terminal on your machine (Terminal on macOS, the Terminal app on Linux, or PowerShell on Windows). Type `echo hello` and press Enter. You should see `hello` printed back at you.",
+              "narration": "Open a terminal and run echo hello. If you see hello printed back, your terminal works and you have run your first command."
+            }
+          ]
+        },
+        {
+          "id": "cli-getting-help",
+          "title": "Getting help without fear",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "Getting help without fear",
+              "lede": "Nobody memorizes the command line. Professionals look things up constantly — here is how.",
+              "narration": "This lecture teaches the two built-in help systems every command carries, so you never have to guess what a command does."
+            },
+            {
+              "kind": "bullets",
+              "heading": "How to read a command",
+              "bullets": [
+                "Options change a command's behavior: -l often means long format, -r often means recursive, -h often means human-readable.",
+                "Most commands answer --help. Typing `ls --help` prints a short summary of what the command does and its options.",
+                "Longer commands have a manual page: `man ls` opens the full documentation. Press q to quit the manual.",
+                "Inside a manual page, type / and a word to search for it, then press n to jump to the next match.",
+                "When stuck, read the error message first. It usually names the exact problem, like a missing file or a typo."
+              ],
+              "narration": "Every command documents itself through --help and manual pages. Learning to read those two sources is more valuable than memorizing any single command."
+            },
+            {
+              "kind": "code",
+              "heading": "Asking a command for help",
+              "code": {
+                "lang": "shell",
+                "code": "$ ls --help\nUsage: ls [OPTION]... [FILE]...\nList information about the FILEs\n...\n\n$ man ls\nLS(1)              User Commands              LS(1)\nNAME\n       ls - list directory contents\n..."
+              },
+              "walkthrough": "--help gives a quick reminder of usage and the most common options. man opens the complete manual with every option explained in detail. Skim the NAME and DESCRIPTION sections first; the EXAMPLES section, when present, is the fastest way to learn.",
+              "narration": "The --help flag gives a quick usage reminder, while man opens the full manual. The NAME line tells you what the command does in one sentence."
+            },
+            {
+              "kind": "diagram",
+              "heading": "The help workflow",
+              "diagram": {
+                "type": "cycle",
+                "title": "The help workflow",
+                "nodes": ["stuck on a command", "try --help first", "open man for detail", "search with /word", "quit with q"],
+                "note": "Quick reminder first, full manual second, search inside it, then quit. This loop answers most command-line questions."
+              },
+              "narration": "The help workflow is a loop: start with --help for a reminder, escalate to man for detail, search within it, and quit when answered."
+            },
+            {
+              "kind": "bullets",
+              "heading": "Common pitfalls",
+              "bullets": [
+                "Typing the prompt character $ yourself. It is printed by the shell; you only type what comes after it.",
+                "Forgetting to press Enter. Nothing happens until you do — the shell waits for that keypress.",
+                "Panicking at an error. Errors are instructions, not verdicts; read them slowly, one line at a time.",
+                "Copy-pasting commands with curly smart quotes instead of straight quotes. They look the same but the shell rejects them."
+              ],
+              "narration": "The most common beginner mistakes are typing the prompt character, forgetting Enter, and fearing error messages. All four pitfalls here are easy to spot once you know they exist."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: read a manual",
+              "text": "Run `man echo` (or `echo --help` on Windows PowerShell, try `Get-Help echo`) and find the one-sentence description of what the command does. Press q to exit the manual when you are done.",
+              "narration": "Practice the help workflow: open a manual page, find the one-sentence description, and quit. This is the habit working professionals use dozens of times a day."
+            }
+          ]
+        }
+      ]
+    },    {
+      "id": "linux-cli",
+      "title": "Linux Command Line",
+      "audience": "Beginners comfortable opening a terminal who need real Linux skills: navigating files, reading text, and chaining commands with pipes.",
+      "lectures": [
+        {
+          "id": "linux-files-folders",
+          "title": "Files, folders, and where you are",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "Files, folders, and where you are",
+              "lede": "Linux keeps every file in one big tree. Learn to walk it and you will never feel lost.",
+              "narration": "This lecture maps the Linux filesystem and teaches the four navigation commands you will use every day: pwd, ls, and cd."
+            },
+            {
+              "kind": "bullets",
+              "heading": "The Linux filesystem",
+              "bullets": [
+                "Everything starts at the root directory, written as /. Folders hang off it like branches of a tree.",
+                "Your personal files live in your home directory, such as /home/alex. The shell shortens this to ~.",
+                "pwd prints where you are right now (print working directory). It is your compass.",
+                "ls lists what is in the current folder. cd <folder> moves you into a folder. cd .. steps back up one level.",
+                "Paths starting with / begin at the root (absolute). Paths without a leading / begin where you are now (relative)."
+              ],
+              "narration": "Linux organizes everything as one tree rooted at slash. Your home folder is your personal branch, and pwd, ls, and cd are how you move through the tree."
+            },
+            {
+              "kind": "diagram",
+              "heading": "The directory tree",
+              "diagram": {
+                "type": "hierarchy",
+                "title": "The directory tree",
+                "nodes": ["/ (root)", "/home", "/home/alex", "/home/alex/docs", "/etc (settings)", "/var/log (logs)"],
+                "note": "Folders nest inside folders. Everything hangs off the single root /, and /home/alex is where your files live."
+              },
+              "narration": "Picture the filesystem as a tree: the root at the top, system folders like etc and var on their own branches, and your home folder holding everything personal."
+            },
+            {
+              "kind": "code",
+              "heading": "Moving around",
+              "code": {
+                "lang": "shell",
+                "code": "$ pwd\n/home/alex\n\n$ ls\ndocs  photos  notes.txt\n\n$ cd docs\n$ pwd\n/home/alex/docs\n\n$ cd ..\n$ pwd\n/home/alex"
+              },
+              "walkthrough": "pwd shows the current folder. ls lists its contents: two folders and one file. cd docs moves into docs, and pwd confirms the new location. cd .. moves back up one level to /home/alex.",
+              "narration": "Watch pwd and cd work together: pwd answers where am I, ls answers what is here, and cd moves you. The double dot always means one level up."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: explore home",
+              "text": "Use pwd to confirm you are in your home folder, then ls to see what is there. Pick one subfolder, cd into it, and come back out with cd ..",
+              "narration": "Practice the navigation loop: confirm with pwd, look with ls, move with cd, and step back with cd dot-dot."
+            }
+          ]
+        },
+        {
+          "id": "linux-text-tools",
+          "title": "Reading and shaping text",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "Reading and shaping text",
+              "lede": "Logs, configs, and data are all text. These five tools let you read, search, and count any of it.",
+              "narration": "This lecture introduces the text toolkit: cat, head, tail, grep, sort, uniq, and wc — the commands behind most log reading and data shaping."
+            },
+            {
+              "kind": "bullets",
+              "heading": "The text toolkit",
+              "bullets": [
+                "cat prints a whole file. less lets you scroll through it page by page (press q to quit).",
+                "head shows the first 10 lines of a file; tail shows the last 10. Add -n 20 to see 20 lines instead.",
+                "grep searches for a word inside files: `grep error app.log` prints every line containing error.",
+                "sort orders lines; uniq removes adjacent duplicates. They are usually paired: `sort file | uniq`.",
+                "wc counts things: lines with -l, words with -w, bytes without a flag."
+              ],
+              "narration": "Five tools read and shape text: cat and less for viewing, head and tail for edges, grep for searching, sort and uniq for ordering, and wc for counting."
+            },
+            {
+              "kind": "code",
+              "heading": "Searching a log file",
+              "code": {
+                "lang": "shell",
+                "code": "$ cat app.log\nINFO starting up\nERROR disk full\nINFO retrying\nERROR disk full\nINFO shutting down\n\n$ grep ERROR app.log\nERROR disk full\nERROR disk full\n\n$ grep -c ERROR app.log\n2"
+              },
+              "walkthrough": "cat dumps the whole log. grep ERROR keeps only the lines containing the word ERROR. grep -c counts matching lines instead of printing them, answering how many errors happened with a single number.",
+              "narration": "A typical debugging session in three commands: view the file, filter to the interesting lines, then count them. This pattern answers most what went wrong questions."
+            },
+            {
+              "kind": "diagram",
+              "heading": "The pipe idea",
+              "diagram": {
+                "type": "flow",
+                "title": "The pipe idea",
+                "nodes": ["command", "output text", "|", "next command", "input text"],
+                "note": "The | pipe character feeds one command's output into the next command's input, chaining small tools into big jobs."
+              },
+              "narration": "The pipe is the command line's superpower: it connects commands so the output of one becomes the input of the next, like an assembly line for text."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: search something",
+              "text": "Pick any text file on your system (try /etc/hosts on Linux or macOS). Run grep on it for a common word like `local` and count the matches with grep -c.",
+              "narration": "Practice searching a real file with grep, then counting matches with grep -c. Searching before reading is the professional habit."
+            }
+          ]
+        },
+        {
+          "id": "linux-pipes-redirect",
+          "title": "Redirecting and chaining commands",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "Redirecting and chaining commands",
+              "lede": "Pipes connect commands to each other; redirection connects them to files. Together they build real workflows.",
+              "narration": "This lecture teaches pipes, output redirection, and command chaining — the combination behind almost every real shell workflow."
+            },
+            {
+              "kind": "bullets",
+              "heading": "Pipes and redirection",
+              "bullets": [
+                "| (pipe) sends a command's output into another command's input.",
+                "> writes output into a file, replacing it. >> appends to the end of a file instead.",
+                "< feeds a file's contents into a command as its input.",
+                "&& runs the next command only if the first one succeeded. A plain ; runs it regardless.",
+                "2> redirects error messages separately from normal output, useful when a command is noisy."
+              ],
+              "narration": "Pipes connect commands to each other, while angle brackets connect commands to files. The double ampersand chains commands so each step only runs if the last one worked."
+            },
+            {
+              "kind": "code",
+              "heading": "A real pipeline",
+              "code": {
+                "lang": "shell",
+                "code": "$ grep ERROR app.log | sort | uniq -c > errors.txt\n\n$ cat errors.txt\n      2 ERROR disk full\n\n$ echo \"checked\" >> errors.txt && echo done\ndone"
+              },
+              "walkthrough": "grep finds the error lines, sort orders them, uniq -c counts the repeats, and > saves the report into errors.txt instead of printing it. Then >> appends the word checked, and && prints done only because the append succeeded.",
+              "narration": "Here is a complete workflow: filter, sort, count, and save — one line. Then append a note and confirm success, all chained together."
+            },
+            {
+              "kind": "diagram",
+              "heading": "The error-report pipeline",
+              "diagram": {
+                "type": "flow",
+                "title": "The error-report pipeline",
+                "nodes": ["grep ERROR app.log", "sort", "uniq -c", "> errors.txt"],
+                "note": "Each stage transforms the text and hands it to the next. The final redirect saves the report instead of printing it."
+              },
+              "narration": "This flow diagram is the pipeline from the code slide: filter to errors, sort them, count repeats, and save the report to a file."
+            },
+            {
+              "kind": "bullets",
+              "heading": "Common pitfalls",
+              "bullets": [
+                "Using > when you meant >> wipes a file's contents. Remember: single > replaces, double >> appends.",
+                "Forgetting quotes around text with spaces. File names containing spaces must be wrapped in quotes.",
+                "Piping into a command that does not read input. For example, ls | cd does nothing because cd never reads stdin.",
+                "Getting Permission denied on a redirect. Check who owns the file with ls -l before assuming the command is wrong."
+              ],
+              "narration": "The classic disasters are wiping a file with a single greater-than sign and piping into commands that ignore input. Both are easy to avoid once you have seen them named."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: build a pipeline",
+              "text": "Chain three commands: list your home folder with ls, search that listing for one letter with grep, and save the result into a file called matches.txt. Then cat the file to check your work.",
+              "narration": "Build your first three-stage pipeline: list, filter, and save. Reading the saved file back confirms each stage did its job."
+            }
+          ]
+        }
+      ]
+    },    {
+      "id": "yaml",
+      "title": "YAML from Zero",
+      "audience": "Beginners who will read or write configuration files for tools like Kubernetes, Ansible, Docker Compose, or CI pipelines.",
+      "lectures": [
+        {
+          "id": "yaml-zero",
+          "title": "YAML from zero",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "YAML from zero",
+              "lede": "YAML is how modern tools store their settings — plain text that both humans and machines can read.",
+              "narration": "This lecture introduces YAML: why it exists, how indentation creates structure, and your first working example."
+            },
+            {
+              "kind": "bullets",
+              "heading": "Why YAML exists",
+              "bullets": [
+                "YAML is a way to write structured data — settings, lists, configurations — that humans can read at a glance.",
+                "Tools like Kubernetes, Ansible, Docker Compose, and CI pipelines all read YAML files.",
+                "It uses indentation with spaces (never tabs) to show what belongs inside what.",
+                "A colon marks a key-value pair: `name: alex` means the key name holds the value alex.",
+                "Comments start with # and are ignored. Use them to explain your config to future you."
+              ],
+              "narration": "YAML stores structured settings as readable text. Indentation shows nesting, colons mark key-value pairs, and hash signs start comments."
+            },
+            {
+              "kind": "code",
+              "heading": "Your first YAML",
+              "code": {
+                "lang": "yaml",
+                "code": "server:\n  host: example.com\n  port: 8080\n  enabled: true\n\n# a simple list lives under 'tags'\ntags:\n  - web\n  - prod"
+              },
+              "walkthrough": "server is a map holding three keys. Indentation nests host, port, and enabled inside server. enabled: true is a boolean, port: 8080 is a number. The dashed lines under tags form a list of two strings.",
+              "narration": "This small example shows everything: a nested map, a boolean, a number, a comment, and a two-item list. Read the indentation to see the structure."
+            },
+            {
+              "kind": "diagram",
+              "heading": "Indentation is nesting",
+              "diagram": {
+                "type": "hierarchy",
+                "title": "Indentation is nesting",
+                "nodes": ["server:", "host: example.com", "port: 8080", "tags:", "- web", "- prod"],
+                "note": "Deeper indentation means inside the thing above. Every level must use the same number of spaces."
+              },
+              "narration": "Think of indentation as a family tree: deeper lines are children of the line above. Consistent spacing is what makes the structure unambiguous."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: describe yourself",
+              "text": "Write a YAML snippet describing yourself: a name, a city, and a list of two hobbies. Check that every nested line is indented by exactly two spaces.",
+              "narration": "Write your own tiny YAML document. If every nested line sits two spaces deeper than its parent, a parser will read it exactly as you intended."
+            }
+          ]
+        },
+        {
+          "id": "yaml-lists-maps",
+          "title": "Lists, maps, and nesting",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "Lists, maps, and nesting",
+              "lede": "Real configs nest lists inside maps inside lists. Learn the two building blocks and you can read any of them.",
+              "narration": "This lecture goes deeper: lists of maps, maps inside lists, and how to tell which is which at a glance."
+            },
+            {
+              "kind": "bullets",
+              "heading": "Two building blocks",
+              "bullets": [
+                "A map is key-value pairs: `name: web`. Order usually does not matter, names must be unique.",
+                "A list is an ordered sequence of items, each starting with a dash and a space: `- web`.",
+                "A list item can itself be a map. The dash starts the item; the indented keys below it belong to that item.",
+                "A map value can be a list. Put the key on one line, then indent the dashed items beneath it.",
+                "Blank lines are ignored, so use them to visually separate sections."
+              ],
+              "narration": "Maps and lists are the only two structures in YAML. Everything complex is just these two nested inside each other."
+            },
+            {
+              "kind": "code",
+              "heading": "A list of maps",
+              "code": {
+                "lang": "yaml",
+                "code": "services:\n  - name: web\n    image: web:v1\n    ports:\n      - 80\n      - 443\n  - name: db\n    image: db:v2"
+              },
+              "walkthrough": "services holds a list of two items. Each dash starts one service, which is a map with name, image, and (for web) ports. The web service's ports value is itself a list of two numbers, indented under ports.",
+              "narration": "Read this inside out: services is a list, each item is a map describing one service, and the web service's ports are a nested list. Three levels, two building blocks."
+            },
+            {
+              "kind": "diagram",
+              "heading": "YAML versus JSON",
+              "diagram": {
+                "type": "compare",
+                "title": "YAML versus JSON",
+                "nodes": ["JSON: braces, brackets, quotes", "YAML: indentation and dashes", "same data either way", "both become maps and lists"],
+                "note": "YAML and JSON describe identical structures. YAML trades punctuation for whitespace to stay readable."
+              },
+              "narration": "YAML and JSON are two spellings of the same data. If you can read a JSON object, you already understand YAML's maps and lists."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: two servers",
+              "text": "Write YAML for a key called `servers` holding a list of two servers. Each server is a map with `name` and `ip` keys. Keep the dashes and indentation aligned.",
+              "narration": "Practice the most common real-world shape: a named list of maps. Getting the dash and indentation alignment right here pays off in every config file you will ever write."
+            }
+          ]
+        },
+        {
+          "id": "yaml-gotchas",
+          "title": "YAML gotchas that bite everyone",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "YAML gotchas that bite everyone",
+              "lede": "Four small rules cause nearly every YAML error. Learn them once and config files stop being scary.",
+              "narration": "This lecture covers the four traps that break YAML files: tabs, the boolean trap, colon spacing, and quoting."
+            },
+            {
+              "kind": "bullets",
+              "heading": "The big four",
+              "bullets": [
+                "Tabs are forbidden. Indent with spaces only — a single tab character anywhere is an error.",
+                "In YAML 1.1, the words yes, no, on, and off parse as booleans. Quote them ('yes') if you mean the literal word.",
+                "A colon must be followed by a space: `key: value` works, `key:value` does not.",
+                "Strings with special characters need quotes: `message: \"hi: there\"` keeps the colon inside the value.",
+                "Consistent indentation depth matters. Pick two spaces per level and never mix depths."
+              ],
+              "narration": "Tabs, unquoted yes and no, missing space after colons, and mixed indentation cause almost every YAML failure. Four rules, memorized once, prevent them all."
+            },
+            {
+              "kind": "code",
+              "heading": "Broken versus fixed",
+              "code": {
+                "lang": "yaml",
+                "code": "# BROKEN: tab indentation + missing space\nserver:\n\thost:example.com\n\n# FIXED: spaces + space after colon\nserver:\n  host: example.com\n  notify: \"yes\""
+              },
+              "walkthrough": "The broken version uses a tab and writes host:example.com with no space — both are errors. The fixed version uses two spaces and a space after each colon. notify is quoted so the word yes stays a string instead of becoming boolean true.",
+              "narration": "Compare the broken and fixed versions line by line. Every difference is one of the big four rules."
+            },
+            {
+              "kind": "diagram",
+              "heading": "The YAML debug loop",
+              "diagram": {
+                "type": "cycle",
+                "title": "The YAML debug loop",
+                "nodes": ["write YAML", "validate with a linter", "read the error's line number", "fix indentation or spacing"],
+                "note": "Every YAML error message points at a line number. Go there first; the mistake is almost always indentation or a missing space."
+              },
+              "narration": "When YAML breaks, do not stare at the whole file. Validate it, read the reported line number, and check indentation and colon spacing on that line."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: spot the bug",
+              "text": "This snippet has one bug — find it: `app:` newline ` name:shop` newline ` port:8080`. (Hint: check what follows each colon.) Then rewrite it correctly.",
+              "narration": "Find the single spacing bug in the broken snippet, then rewrite it correctly. Spotting these quickly is the skill this whole track builds."
+            }
+          ]
+        }
+      ]
+    },    {
+      "id": "networking",
+      "title": "Networking Fundamentals",
+      "audience": "Beginners who need the core ideas behind every networked system: addresses, DNS, ports, and HTTP.",
+      "lectures": [
+        {
+          "id": "net-what-is",
+          "title": "What a network is",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "What a network is",
+              "lede": "A network is just computers that can reach each other — and every cloud, website, and app you will study sits on top of one.",
+              "narration": "This lecture defines networks, packets, and IP addresses — the three ideas everything else in networking builds on."
+            },
+            {
+              "kind": "bullets",
+              "heading": "Networks in one minute",
+              "bullets": [
+                "A network is two or more computers linked so they can exchange data. The internet is the biggest one.",
+                "Data travels in small chunks called packets. Each packet carries a destination address and a piece of the message.",
+                "An IP address is a numeric label identifying a device on a network, like a street address for computers.",
+                "IPv4 addresses look like 192.168.1.10: four numbers (octets), each 0 to 255, separated by dots.",
+                "Devices called routers forward packets toward their destination, hop by hop, until they arrive."
+              ],
+              "narration": "Computers exchange data as packets, each labeled with a destination IP address. Routers forward those packets hop by hop across networks until they arrive."
+            },
+            {
+              "kind": "diagram",
+              "heading": "A packet's journey",
+              "diagram": {
+                "type": "flow",
+                "title": "A packet's journey",
+                "nodes": ["your computer", "home router", "internet", "their router", "server"],
+                "note": "Packets hop from device to device. No single wire connects you to the server; routers chain the path together."
+              },
+              "narration": "Follow one packet from your computer to a server: it hops through your router, across the internet, through their router, and finally arrives. Every web page you load takes this trip."
+            },
+            {
+              "kind": "code",
+              "heading": "Checking the path with ping",
+              "code": {
+                "lang": "shell",
+                "code": "$ ping -c 3 example.com\nPING example.com (93.184.216.34): 56 data bytes\n64 bytes from 93.184.216.34: icmp_seq=0 ttl=55 time=18.2 ms\n64 bytes from 93.184.216.34: icmp_seq=1 ttl=55 time=17.9 ms\n\n--- example.com ping statistics ---\n3 packets transmitted, 3 packets received, 0% packet loss"
+              },
+              "walkthrough": "ping sends small echo-request packets and times the replies. The address in parentheses is the server's IP. time=18.2 ms is the round trip — lower is faster. 0% packet loss means every packet made it there and back.",
+              "narration": "Ping is the simplest network test: it sends echo packets and reports how long the round trip took. Zero percent loss and low milliseconds mean a healthy path."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: ping something",
+              "text": "Run `ping -c 3 example.com` in your terminal. Read the time values — that is how many milliseconds a round trip to that server takes from where you sit.",
+              "narration": "Ping a real server and read the round-trip times. Those milliseconds are the physical distance of the internet, measured."
+            }
+          ]
+        },
+        {
+          "id": "net-dns",
+          "title": "DNS: the internet's phone book",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "DNS: the internet's phone book",
+              "lede": "Humans remember names like example.com. Computers need numbers like 93.184.216.34. DNS translates between them.",
+              "narration": "This lecture explains the Domain Name System: the hierarchical lookup that turns every name you type into an IP address."
+            },
+            {
+              "kind": "bullets",
+              "heading": "How DNS works",
+              "bullets": [
+                "DNS is a distributed directory that maps domain names to IP addresses.",
+                "It is hierarchical: root servers know where .com lives, .com servers know where example.com lives, and example.com's servers give the final address.",
+                "Your computer asks a resolver (usually run by your ISP or a public service) which walks this chain for you.",
+                "Answers are cached at every level, so repeat visits skip most of the chain and resolve fast.",
+                "If DNS fails, names stop resolving — the internet still works, but you cannot find anything by name."
+              ],
+              "narration": "DNS walks a hierarchy from root to top-level domain to the domain itself, caching answers along the way. When DNS breaks, the internet feels broken even though packets still flow."
+            },
+            {
+              "kind": "diagram",
+              "heading": "A DNS lookup, step by step",
+              "diagram": {
+                "type": "layers",
+                "title": "A DNS lookup, step by step",
+                "nodes": ["you type example.com", "resolver", "root servers", ".com servers", "example.com servers", "93.184.216.34"],
+                "note": "Each layer answers one smaller question. Caching means most lookups only touch the first one or two layers."
+              },
+              "narration": "Each layer of DNS answers a smaller question than the last, narrowing down from the root to the exact address. Caching short-circuits this chain for names you visit often."
+            },
+            {
+              "kind": "code",
+              "heading": "Looking up a name yourself",
+              "code": {
+                "lang": "shell",
+                "code": "$ nslookup example.com\nServer:         192.168.1.1\nAddress:        192.168.1.1#53\n\nNon-authoritative answer:\nName:   example.com\nAddress: 93.184.216.34"
+              },
+              "walkthrough": "nslookup asks your resolver for a name's address. The Server lines show which resolver answered. The Address line is the answer: example.com currently lives at 93.184.216.34.",
+              "narration": "The nslookup command performs a DNS lookup on demand. The last line is the answer your browser would use to connect."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: compare two sites",
+              "text": "Run nslookup on two different websites and compare their addresses. Notice that big sites may return different addresses on repeat lookups — that is load balancing, not an error.",
+              "narration": "Look up two sites and compare. Seeing multiple addresses for one name is normal: large sites spread traffic across many servers."
+            }
+          ]
+        },
+        {
+          "id": "net-ports",
+          "title": "Ports and services",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "Ports and services",
+              "lede": "An IP address finds the machine. A port number finds the program on that machine.",
+              "narration": "This lecture explains ports: how one server runs many services, the famous port numbers, and TCP versus UDP."
+            },
+            {
+              "kind": "bullets",
+              "heading": "Ports in one minute",
+              "bullets": [
+                "A port is a 16-bit number (0 to 65535) identifying a specific program on a machine.",
+                "The IP address gets the packet to the computer; the port number gets it to the right program.",
+                "Famous ports are standardized: 80 is HTTP, 443 is HTTPS, 22 is SSH, 53 is DNS, 25 is SMTP email.",
+                "You rarely type ports because software assumes the defaults: browsers use 443 for https:// automatically.",
+                "A port only accepts traffic if a program is listening on it. Closed ports simply refuse the connection."
+              ],
+              "narration": "Ports let one machine run dozens of services at one address. The famous numbers — 80, 443, 22, 53 — are conventions every professional recognizes."
+            },
+            {
+              "kind": "code",
+              "heading": "Reading host:port",
+              "code": {
+                "lang": "text",
+                "code": "https://example.com:443\n|_____| |___________| |__|\nscheme      host        port\n\nhttps://example.com      (port 443 implied)\nhttp://example.com:8080  (non-standard port shown)"
+              },
+              "walkthrough": "A full address has three parts: the scheme (https), the host (example.com), and the port (443). Default ports are implied and usually hidden; you only write the port when a service uses a non-standard one, like 8080.",
+              "narration": "Addresses are scheme, host, and port. Defaults stay invisible; unusual ports are written out explicitly after a colon."
+            },
+            {
+              "kind": "diagram",
+              "heading": "TCP versus UDP",
+              "diagram": {
+                "type": "compare",
+                "title": "TCP versus UDP",
+                "nodes": ["TCP: reliable and ordered", "like a phone call", "UDP: fast, no guarantees", "like a postcard"],
+                "note": "Web pages and files use TCP. Live video and games use UDP, where speed beats perfection."
+              },
+              "narration": "TCP guarantees every packet arrives in order, like a phone call. UDP fires packets off with no promises, like postcards — faster, but some may never arrive."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: name that port",
+              "text": "From memory, match each port to its service: 80, 443, 22, 53. Then think: which port does your browser use when you visit an https:// site?",
+              "narration": "Quiz yourself on the four famous ports. Recognizing 80, 443, 22, and 53 on sight is a genuine professional skill."
+            }
+          ]
+        },
+        {
+          "id": "net-http",
+          "title": "HTTP: the language of the web",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "HTTP: the language of the web",
+              "lede": "Every page, image, and API call on the web is an HTTP conversation: a request, then a response.",
+              "narration": "This lecture teaches HTTP requests and responses: methods, status codes, and how to inspect a real conversation with curl."
+            },
+            {
+              "kind": "bullets",
+              "heading": "Requests and responses",
+              "bullets": [
+                "HTTP is a request/response protocol: the client asks, the server answers. HTTPS is the same conversation, encrypted.",
+                "Methods say what you want: GET reads, POST submits, PUT replaces, DELETE removes.",
+                "Every response carries a status code. The first digit tells the story: 2xx success, 3xx redirect, 4xx your mistake, 5xx their mistake.",
+                "200 means OK, 404 means not found, 403 means forbidden, 500 means the server crashed handling your request.",
+                "Headers are metadata on both sides: content type, caching rules, authentication tokens."
+              ],
+              "narration": "HTTP is a simple dialogue: the client makes a request with a method, and the server replies with a status code and content. The status code's first digit tells you who is at fault when something breaks."
+            },
+            {
+              "kind": "diagram",
+              "heading": "One page load",
+              "diagram": {
+                "type": "cycle",
+                "title": "One page load",
+                "nodes": ["browser sends request", "GET /index.html", "server processes", "200 OK plus the page", "browser renders"],
+                "note": "Every page load is one or more of these cycles. Images, styles, and scripts each trigger their own request."
+              },
+              "narration": "A page load is a cycle: request, processing, response, render. Modern pages repeat this cycle dozens of times for images, styles, and scripts."
+            },
+            {
+              "kind": "code",
+              "heading": "Watching HTTP with curl",
+              "code": {
+                "lang": "shell",
+                "code": "$ curl -sI https://example.com | head -5\nHTTP/2 200\ncontent-type: text/html; charset=UTF-8\ncontent-length: 1256\ndate: Sun, 04 Oct 2026 15:52:00 GMT\nserver: ECS"
+              },
+              "walkthrough": "curl -I asks for just the response headers. HTTP/2 200 is the status line: protocol plus success. content-type says this is an HTML page. The rest is metadata the server volunteers about its answer.",
+              "narration": "The curl command lets you watch raw HTTP. The status line and content-type header tell you whether the request worked and what kind of data came back."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: read a status line",
+              "text": "Run `curl -sI https://example.com` and find the status code. Then try a nonsense path like `curl -sI https://example.com/nope` and watch the code change.",
+              "narration": "Fetch headers for a real page and a missing page. Seeing 200 become 404 makes status codes concrete instead of abstract."
+            }
+          ]
+        }
+      ]
+    },    {
+      "id": "iam-concepts",
+      "title": "Identity & Access Concepts",
+      "audience": "Beginners who need the mental model behind every login system and cloud permission: users, groups, roles, and policies.",
+      "lectures": [
+        {
+          "id": "iam-users",
+          "title": "Users, groups, and why they exist",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "Users, groups, and why they exist",
+              "lede": "Every permission system answers one question: who is allowed to do what? It starts with identity.",
+              "narration": "This lecture introduces identities: users, groups, and the habit of attaching permissions to groups instead of people."
+            },
+            {
+              "kind": "bullets",
+              "heading": "Identity basics",
+              "bullets": [
+                "An identity is a who: a person, or sometimes a program acting on its own.",
+                "A user is a long-lived identity, usually one per human, with its own credentials.",
+                "A group bundles users together so you can manage them as one unit: developers, operators, interns.",
+                "Permissions attach to groups, not to people. People join and leave groups; the permissions stay put.",
+                "Least privilege: give every identity only the access it actually needs, and nothing more."
+              ],
+              "narration": "Users identify people, groups bundle them, and permissions attach to the groups. Least privilege — nothing more than needed — is the rule behind every good setup."
+            },
+            {
+              "kind": "diagram",
+              "heading": "Attach permissions to groups",
+              "diagram": {
+                "type": "hierarchy",
+                "title": "Attach permissions to groups",
+                "nodes": ["organization", "group: developers", "users: alex, priya", "group: operators", "users: sam"],
+                "note": "When Priya changes teams, you move her between groups. No permissions are edited, so nothing is forgotten."
+              },
+              "narration": "Groups sit between people and permissions. Moving a person between groups updates everything they can do in one step, with no stale access left behind."
+            },
+            {
+              "kind": "code",
+              "heading": "A tiny access map",
+              "code": {
+                "lang": "text",
+                "code": "developers  ->  read/write code repos\noperators   ->  restart servers, read logs\ninterns     ->  read-only dashboards\n\nalex: developers\npriya: developers, operators\nsam: operators"
+              },
+              "walkthrough": "Three groups each hold a bundle of permissions. Alex is a developer, Sam is an operator, and Priya sits in both groups, so she gets both bundles. Nobody's permissions are written next to their name.",
+              "narration": "This access map shows the pattern: permissions live on groups, and people collect permissions by membership. Priya's two memberships combine."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: design groups",
+              "text": "Sketch your own tiny organization: three users and two groups. Decide which permissions each group holds and who belongs where.",
+              "narration": "Design groups for a fictional team. Deciding where permissions live is the core skill of access management."
+            }
+          ]
+        },
+        {
+          "id": "iam-roles",
+          "title": "Roles: borrowing permission",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "Roles: borrowing permission",
+              "lede": "Users are who you are. Roles are hats you put on temporarily — powerful, then gone.",
+              "narration": "This lecture explains roles: temporary identities you assume, why they beat permanent keys, and where you will meet them."
+            },
+            {
+              "kind": "bullets",
+              "heading": "Roles in one minute",
+              "bullets": [
+                "A role is an identity with permissions attached, but nobody logs in as it directly.",
+                "Instead, a user or program assumes the role and receives temporary credentials, often lasting minutes to hours.",
+                "When the credentials expire, the power evaporates. There is no permanent key to steal.",
+                "Common uses: an app reading files from storage, an admin elevating for a sensitive task, one account helping another.",
+                "A trust policy controls who is allowed to assume the role in the first place."
+              ],
+              "narration": "Roles hand out short-lived power instead of permanent keys. Assuming a role, doing the task, and letting the credentials expire is the safe pattern."
+            },
+            {
+              "kind": "diagram",
+              "heading": "Assuming a role",
+              "diagram": {
+                "type": "flow",
+                "title": "Assuming a role",
+                "nodes": ["you (user)", "assume the role", "temporary credentials", "act with the role's power", "credentials expire"],
+                "note": "The power is borrowed, never owned. Expiry is automatic, so forgotten keys cannot linger."
+              },
+              "narration": "Assuming a role is a five-step dance: request, receive temporary credentials, act, and let them expire. Nothing permanent is ever created."
+            },
+            {
+              "kind": "code",
+              "heading": "User versus role",
+              "code": {
+                "lang": "text",
+                "code": "user:  alex\n  credentials: password (long-lived)\n  power: whatever alex's groups allow\n\nrole:  backup-writer\n  credentials: temporary token (expires in 1h)\n  power: write backup files, nothing else\n\nnightly job -> assumes backup-writer -> writes -> done"
+              },
+              "walkthrough": "Alex the user has a long-lived password and broad group permissions. The backup-writer role has a narrow job and one-hour credentials. The nightly job assumes the role, writes backups, and the power vanishes when the hour ends.",
+              "narration": "Compare the permanent user with the temporary role: narrow power, short life, no password to leak. Jobs and apps should almost always use roles."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: spot the role",
+              "text": "Think of one task in your own life or work that currently uses a permanent key or password but should use temporary access instead. Write down what the role would be allowed to do and how long it should last.",
+              "narration": "Find a permanent credential in your own world that deserves to be temporary. Naming the role and its expiry is how access design starts."
+            }
+          ]
+        },
+        {
+          "id": "iam-policies",
+          "title": "Policies: allow and deny",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "Policies: allow and deny",
+              "lede": "Policies are the rule documents that say exactly what an identity may do. Learn to read one and you can audit any system.",
+              "narration": "This lecture teaches policy documents: allow versus deny, the anatomy of a rule, and the mistakes that cause real breaches."
+            },
+            {
+              "kind": "bullets",
+              "heading": "Policy basics",
+              "bullets": [
+                "A policy is a document listing what an identity is allowed (or denied) to do.",
+                "Policies attach to users, groups, or roles. The identity's effective power is the combination.",
+                "Rules name an action (what), a resource (which thing), and an effect (allow or deny).",
+                "An explicit deny always beats an allow. Deny is the emergency brake.",
+                "The * wildcard means everything: powerful in the wrong place, useful in narrow ones."
+              ],
+              "narration": "Policies are rule lists attached to identities. Allow grants power, deny overrides everything, and wildcards demand respect."
+            },
+            {
+              "kind": "code",
+              "heading": "Reading a policy",
+              "code": {
+                "lang": "json",
+                "code": "{\n  \"Effect\": \"Allow\",\n  \"Action\": \"s3:GetObject\",\n  \"Resource\": \"arn:aws:s3:::reports/*\"\n}"
+              },
+              "walkthrough": "Effect: Allow grants permission. Action names exactly one operation: reading an object. Resource scopes it to one bucket's contents, with * matching every file under reports/. This identity can read those files and do nothing else.",
+              "narration": "This real-style policy allows exactly one action on exactly one set of files. Reading Effect, Action, and Resource tells you the whole story."
+            },
+            {
+              "kind": "diagram",
+              "heading": "How a request is judged",
+              "diagram": {
+                "type": "flow",
+                "title": "How a request is judged",
+                "nodes": ["request arrives", "any explicit deny?", "any matching allow?", "allowed or denied"],
+                "note": "Deny is checked first and always wins. Without a matching allow, the default answer is deny."
+              },
+              "narration": "Every request runs this gauntlet: an explicit deny stops it cold, a matching allow lets it through, and silence means no."
+            },
+            {
+              "kind": "bullets",
+              "heading": "Common pitfalls",
+              "bullets": [
+                "Overbroad wildcards: Action * on Resource * is full admin power. Never grant it by accident.",
+                "Forgetting that an explicit deny overrides every allow. One deny can silently block a whole workflow.",
+                "Scoping the resource too loosely, like a whole storage account when one folder would do.",
+                "Assuming a policy grants access the service itself would refuse. Policies can only narrow, never widen, what is possible."
+              ],
+              "narration": "Real breaches come from these four mistakes: wildcards too broad, forgotten denies, loose resource scoping, and assuming policies can grant the impossible."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: extend the policy",
+              "text": "In one sentence, describe what the example policy allows. Then decide: what second Action would you add so the identity can also list the bucket's contents (hint: the action is called s3:ListBucket)?",
+              "narration": "Describe the example policy's power in your own words, then extend it with a second action. Editing policies deliberately is the skill behind every access review."
+            }
+          ]
+        }
+      ]
+    },    {
+      "id": "python",
+      "title": "Python from Zero",
+      "audience": "Complete programming beginners who need to read and write small Python scripts before tackling data, cloud, or AI paths.",
+      "lectures": [
+        {
+          "id": "python-first-script",
+          "title": "Your first script",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "Your first script",
+              "lede": "Python reads almost like English. Three lines are enough to write, run, and understand your first program.",
+              "narration": "This lecture runs your first Python program: printing text, storing values in variables, and running a file."
+            },
+            {
+              "kind": "bullets",
+              "heading": "Python in one minute",
+              "bullets": [
+                "Python is a programming language prized for readability: its code looks close to plain English.",
+                "print() displays text on the screen. Whatever you put inside the parentheses appears as output.",
+                "A variable stores a value under a name: `name = \"Alex\"` keeps the text Alex available as name.",
+                "You run a file with `python3 app.py`. Python reads your code top to bottom and executes each line.",
+                "Text values are called strings and sit in quotes. Numbers need no quotes."
+              ],
+              "narration": "Python's readability makes it the standard first language. Print shows output, variables store values, and python3 runs your file top to bottom."
+            },
+            {
+              "kind": "code",
+              "heading": "Hello, variables",
+              "code": {
+                "lang": "python",
+                "code": "name = \"Alex\"\nprint(\"Hello,\", name)\n\ncount = 3\nprint(count + 4)"
+              },
+              "walkthrough": "Line 1 stores the string Alex in name. Line 2 prints Hello, followed by the variable's value. Line 4 stores the number 3 in count, and line 5 prints 7, because + adds numbers together.",
+              "narration": "Two variables, two prints. Strings join with commas in print, numbers add with plus — the same symbol does different jobs depending on the type."
+            },
+            {
+              "kind": "diagram",
+              "heading": "How Python runs your code",
+              "diagram": {
+                "type": "flow",
+                "title": "How Python runs your code",
+                "nodes": ["you write app.py", "python3 app.py", "interpreter reads line by line", "text appears"],
+                "note": "Python is interpreted: it runs your code directly, with no separate compile step."
+              },
+              "narration": "Python skips the compile step other languages need. The interpreter reads each line and runs it immediately, which makes experimenting fast."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: change the name",
+              "text": "Save the example as hello.py, run it with `python3 hello.py`, then change the name to your own and run it again. Watch the output change.",
+              "narration": "Edit and re-run: the fastest learning loop in programming. Change one value, run, and observe."
+            }
+          ]
+        },
+        {
+          "id": "python-decisions-loops",
+          "title": "Decisions and repetition",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "Decisions and repetition",
+              "lede": "Programs get interesting when they can choose and repeat. That is two ideas: if and for.",
+              "narration": "This lecture adds branching with if and else, and repetition with for loops — the two structures behind nearly all logic."
+            },
+            {
+              "kind": "bullets",
+              "heading": "Choosing and repeating",
+              "bullets": [
+                "if tests a condition. The indented block under it runs only when the condition is true.",
+                "else catches everything the if missed. elif (else-if) tests a second condition in between.",
+                "Indentation is not style in Python — it defines which lines belong to the if or the loop.",
+                "for repeats a block once per item: `for name in [\"a\", \"b\"]` runs twice.",
+                "range(n) produces the numbers 0 through n-1, handy for counting loops."
+              ],
+              "narration": "If chooses, for repeats, and indentation shows what belongs inside each. Range gives you clean counting without manual bookkeeping."
+            },
+            {
+              "kind": "code",
+              "heading": "A loop and a decision",
+              "code": {
+                "lang": "python",
+                "code": "for i in range(3):\n    print(\"count:\", i)\n\nscore = 85\nif score >= 90:\n    print(\"A\")\nelse:\n    print(\"not an A\")"
+              },
+              "walkthrough": "The loop runs three times with i set to 0, 1, then 2, printing each. Then score is 85, so score >= 90 is false, the if block is skipped, and the else block prints not an A.",
+              "narration": "Trace it: the loop prints three lines, then the condition fails and the else branch runs. Indentation is what ties each print to its block."
+            },
+            {
+              "kind": "diagram",
+              "heading": "A loop, visualized",
+              "diagram": {
+                "type": "cycle",
+                "title": "A loop, visualized",
+                "nodes": ["for i in range(3)", "i = 0, print", "i = 1, print", "i = 2, print", "loop ends"],
+                "note": "The indented body repeats once per value, then the program continues after the loop."
+              },
+              "narration": "A loop is a cycle: set the variable, run the body, repeat. When the values run out, the program moves on past the loop."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: squares",
+              "text": "Write a for loop using range(1, 6) that prints the square of each number (i * i). You should see 1, 4, 9, 16, 25.",
+              "narration": "Write a loop that prints squares from 1 to 25. Getting the range bounds right is the exercise."
+            }
+          ]
+        },
+        {
+          "id": "python-functions-files",
+          "title": "Functions and files",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "Functions and files",
+              "lede": "Functions package reusable logic. Files let programs remember. Together they build real scripts.",
+              "narration": "This lecture defines functions with def and return, and reads files with open — the two tools behind most practical scripts."
+            },
+            {
+              "kind": "bullets",
+              "heading": "Functions and files",
+              "bullets": [
+                "def names a reusable block: `def greet(name):` creates a function taking one input, called a parameter.",
+                "return sends a value back to the caller. Without return, a function gives back nothing.",
+                "open(\"notes.txt\") opens a file for reading. The with block closes it automatically when done.",
+                "f.read() pulls the whole file contents into one string. len() measures how long it is.",
+                "Call a function by its name with parentheses: greet(\"Alex\") runs the block with name set to Alex."
+              ],
+              "narration": "Functions wrap logic you can reuse; files persist data beyond one run. Def plus return defines the first, open plus with handles the second."
+            },
+            {
+              "kind": "code",
+              "heading": "A function that reads a file",
+              "code": {
+                "lang": "python",
+                "code": "def greet(name):\n    return \"Hello, \" + name\n\nwith open(\"notes.txt\") as f:\n    text = f.read()\n\nprint(greet(\"Alex\"))\nprint(len(text), \"characters read\")"
+              },
+              "walkthrough": "greet takes a name and returns a greeting string. The with block opens notes.txt, reads it into text, and closes the file safely. The prints show the greeting and how many characters were read.",
+              "narration": "This script defines a function, reads a file, and reports both results. It is a complete, realistic small program in eight lines."
+            },
+            {
+              "kind": "diagram",
+              "heading": "Calling a function",
+              "diagram": {
+                "type": "flow",
+                "title": "Calling a function",
+                "nodes": ["define with def", "call with ()", "parameter receives value", "return sends answer back"],
+                "note": "Definition stores the recipe; the call runs it. Return is how the answer travels back to the caller."
+              },
+              "narration": "Functions have two moments: definition stores the recipe, the call runs it. The return value is the finished dish handed back."
+            },
+            {
+              "kind": "bullets",
+              "heading": "Common pitfalls",
+              "bullets": [
+                "Forgetting return. The function runs, but the caller receives nothing and the result vanishes.",
+                "Indentation slips. One misaligned line can move code in or out of a function silently.",
+                "File not found. open() looks in the folder where you run the script, not where the script file lives.",
+                "range() stops one short. range(3) gives 0, 1, 2 — never 3. This off-by-one bites everyone."
+              ],
+              "narration": "The classic beginner bugs: missing returns, drifting indentation, wrong working directory, and range stopping one early. Expect all four; recognize them fast."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: double it",
+              "text": "Write a function called double that takes a number n and returns n * 2. Then print double(21) — you should see 42.",
+              "narration": "Define double, call it with 21, and confirm 42. A working function you wrote yourself is the milestone this track builds toward."
+            }
+          ]
+        }
+      ]
+    },    {
+      "id": "sql",
+      "title": "SQL from Zero",
+      "audience": "Beginners who need to read data from databases: tables, SELECT queries, filtering, and sorting.",
+      "lectures": [
+        {
+          "id": "sql-tables",
+          "title": "Tables: rows and columns",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "Tables: rows and columns",
+              "lede": "A database is a collection of tables, and a table is just rows and columns — a spreadsheet with rules.",
+              "narration": "This lecture introduces the relational model: databases, tables, columns with types, and the primary key that identifies each row."
+            },
+            {
+              "kind": "bullets",
+              "heading": "The relational model",
+              "bullets": [
+                "A database holds many tables. Each table stores one kind of thing: customers, orders, products.",
+                "A table is rows and columns. Columns define the shape; each row is one record.",
+                "Every column has a type: text for names, numbers for prices, dates for timestamps, true/false for flags.",
+                "A primary key is the column (or columns) that uniquely identifies each row, like a customer id.",
+                "NULL means missing or unknown — it is not zero, and it is not an empty string."
+              ],
+              "narration": "Tables store one kind of thing as rows; columns with strict types define the shape. Primary keys identify rows, and NULL marks the unknown."
+            },
+            {
+              "kind": "diagram",
+              "heading": "Anatomy of a table",
+              "diagram": {
+                "type": "hierarchy",
+                "title": "Anatomy of a table",
+                "nodes": ["table: customers", "columns: id, name, city", "row 1: 1, Alex, Boston", "row 2: 2, Priya, Austin"],
+                "note": "Columns define the shape and types; rows hold the actual data, one record per row."
+              },
+              "narration": "See the table as a grid with rules: the header row defines typed columns, and every data row must fit that shape."
+            },
+            {
+              "kind": "code",
+              "heading": "A table, drawn",
+              "code": {
+                "lang": "text",
+                "code": "customers\n+----+-------+--------+\n| id | name  | city   |\n+----+-------+--------+\n|  1 | Alex  | Boston |\n|  2 | Priya | Austin |\n|  3 | Sam   | Boston |\n+----+-------+--------+\nid is the primary key: no two rows share one."
+              },
+              "walkthrough": "Three columns: id (number, primary key), name (text), city (text). Three rows, each a customer. The id values 1, 2, 3 are unique — that uniqueness is what makes id a primary key.",
+              "narration": "This text drawing is exactly how query results look. The id column's uniqueness is the primary key doing its job."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: design a table",
+              "text": "Sketch a table for your bookshelf. Pick three columns, choose a type for each (text, number, or date), and decide which column is the primary key.",
+              "narration": "Design a tiny table yourself: columns, types, and a primary key. Every database you will ever query started as a sketch like this."
+            }
+          ]
+        },
+        {
+          "id": "sql-select",
+          "title": "SELECT: asking questions",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "SELECT: asking questions",
+              "lede": "SQL is a language for asking questions about data. The first question is always: show me this table.",
+              "narration": "This lecture teaches the SELECT statement: choosing columns, choosing tables, and reading the results."
+            },
+            {
+              "kind": "bullets",
+              "heading": "The SELECT statement",
+              "bullets": [
+                "SELECT names the columns you want. FROM names the table they come from.",
+                "SELECT * means all columns. Useful for exploring, wasteful in production code.",
+                "Statements end with a semicolon. SQL ignores extra whitespace and line breaks.",
+                "Column names and keywords are usually case-insensitive, but string values are not.",
+                "Read a query inside-out: FROM picks the table first, then SELECT picks the columns."
+              ],
+              "narration": "SELECT columns FROM table is the whole basic query. Read it inside-out — table first, columns second — and every query becomes readable."
+            },
+            {
+              "kind": "code",
+              "heading": "Your first query",
+              "code": {
+                "lang": "sql",
+                "code": "SELECT name, city\nFROM customers;"
+              },
+              "walkthrough": "FROM customers picks the table. SELECT name, city keeps only those two columns, dropping id. The result is a new table with two columns and all three rows.",
+              "narration": "This query returns every customer's name and city, dropping the id column. Two clauses, one question answered."
+            },
+            {
+              "kind": "diagram",
+              "heading": "What SELECT does",
+              "diagram": {
+                "type": "flow",
+                "title": "What SELECT does",
+                "nodes": ["FROM customers", "database scans all rows", "SELECT name, city", "result: 2 columns, 3 rows"],
+                "note": "FROM chooses the rows, SELECT chooses the columns. The database does the scanning; you describe the shape you want."
+              },
+              "narration": "Think of a query as a filter on the table's shape: FROM grabs the rows, SELECT trims the columns, and the result is a fresh table."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: select everything",
+              "text": "Write a query that returns all columns from a table called orders. Then write one that returns only the total column.",
+              "narration": "Practice the two basic shapes: everything with star, and one column by name. These cover most exploratory queries."
+            }
+          ]
+        },
+        {
+          "id": "sql-filter-sort",
+          "title": "Filtering and sorting",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "Filtering and sorting",
+              "lede": "Real questions have conditions: which customers, in what order, how many? WHERE, ORDER BY, and LIMIT answer them.",
+              "narration": "This lecture adds filtering with WHERE, sorting with ORDER BY, and capping results with LIMIT."
+            },
+            {
+              "kind": "bullets",
+              "heading": "Narrowing the answer",
+              "bullets": [
+                "WHERE filters rows: only rows matching the condition appear in the result.",
+                "Comparisons use = , <>, <, >, <=, >=. Text values go in single quotes: city = 'Boston'.",
+                "ORDER BY sorts the result by a column. Add DESC for descending, largest first.",
+                "LIMIT caps how many rows come back. LIMIT 5 returns at most five rows.",
+                "Clause order is fixed: SELECT ... FROM ... WHERE ... ORDER BY ... LIMIT ..."
+              ],
+              "narration": "WHERE keeps matching rows, ORDER BY sorts them, LIMIT caps the count. The clause order never changes, so queries stay readable."
+            },
+            {
+              "kind": "code",
+              "heading": "Filtered, sorted, capped",
+              "code": {
+                "lang": "sql",
+                "code": "SELECT name, city\nFROM customers\nWHERE city = 'Boston'\nORDER BY name\nLIMIT 5;"
+              },
+              "walkthrough": "FROM picks customers. WHERE keeps only rows where city equals Boston. ORDER BY name sorts those survivors alphabetically. LIMIT 5 returns at most five. Each clause narrows the previous result.",
+              "narration": "Four clauses, one precise question: the first five Boston customers, alphabetically. Each line refines the answer a step further."
+            },
+            {
+              "kind": "diagram",
+              "heading": "The clause pipeline",
+              "diagram": {
+                "type": "flow",
+                "title": "The clause pipeline",
+                "nodes": ["FROM: all rows", "WHERE: matching rows", "ORDER BY: sorted rows", "LIMIT: first 5 rows"],
+                "note": "Each clause shrinks or orders the previous result. The order of clauses is fixed and always the same."
+              },
+              "narration": "Clauses run as a pipeline: take the table, keep matching rows, sort them, then cap the count. Fixed order, predictable results."
+            },
+            {
+              "kind": "bullets",
+              "heading": "Common pitfalls",
+              "bullets": [
+                "SQL uses a single = for comparison. == is a syntax error in most databases.",
+                "Text values need single quotes. WHERE city = Boston (no quotes) fails because Boston looks like a column name.",
+                "WHERE comes before ORDER BY. Swapping them is a syntax error.",
+                "Forgetting the semicolon. One statement can span many lines, but it needs its terminator.",
+                "NULL never equals anything, not even NULL. Filtering missing values needs IS NULL, a topic for later."
+              ],
+              "narration": "The classic SQL mistakes: double equals, unquoted text, swapped clause order, and treating NULL like an ordinary value."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: Austin, alphabetically",
+              "text": "Write a query returning the name column from customers, keeping only rows where city is 'Austin', sorted by name.",
+              "narration": "Combine WHERE and ORDER BY in one query. This exact shape — filter then sort — appears in real work constantly."
+            }
+          ]
+        }
+      ]
+    },    {
+      "id": "cloud-concepts",
+      "title": "Cloud Concepts",
+      "audience": "Beginners who need the mental model behind AWS, Azure, and OCI: regions, services, billing, and who is responsible for what.",
+      "lectures": [
+        {
+          "id": "cloud-regions",
+          "title": "Regions and availability zones",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "Regions and availability zones",
+              "lede": "The cloud is just someone else's data centers — organized into regions and zones you choose between.",
+              "narration": "This lecture explains regions and availability zones: the geography of the cloud and why placement matters."
+            },
+            {
+              "kind": "bullets",
+              "heading": "Cloud geography",
+              "bullets": [
+                "A region is a geographic area containing cloud data centers, like us-east-1 in Virginia or eu-west-1 in Ireland.",
+                "An availability zone (AZ) is one or more isolated data centers inside a region, with independent power and networking.",
+                "Deploying across multiple AZs keeps your app running when one data center fails.",
+                "Pick regions close to your users: distance becomes latency, and latency becomes slowness.",
+                "Some services are regional (one copy per region); some are global (one copy worldwide)."
+              ],
+              "narration": "Regions are places, zones are isolated buildings within them. Spreading across zones buys resilience; choosing nearby regions buys speed."
+            },
+            {
+              "kind": "diagram",
+              "heading": "One region, three zones",
+              "diagram": {
+                "type": "hierarchy",
+                "title": "One region, three zones",
+                "nodes": ["region: us-east-1", "zone a: data center", "zone b: data center", "zone c: data center"],
+                "note": "Zones fail independently but act as one region. Your app runs in two or more; if one goes dark, the others carry on."
+              },
+              "narration": "A region is a cluster of independent zones. Running your app in several zones means one building's bad day is not your outage."
+            },
+            {
+              "kind": "code",
+              "heading": "Choosing a region",
+              "code": {
+                "lang": "text",
+                "code": "users in Boston  ->  us-east-1 (Virginia): ~10 ms away\nusers in Boston  ->  eu-west-1 (Ireland): ~80 ms away\n\nregion = \"us-east-1\"   # pick once, close to your users\ndeploy to zones a, b, c # survive one zone failing"
+              },
+              "walkthrough": "Virginia is a short hop from Boston; Ireland is an ocean away. Region choice is a latency decision you make once. Zone choice is a resilience decision you make per deployment.",
+              "narration": "Region is about distance to users; zones are about surviving failure. Both choices are made up front and rarely revisited."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: place an app",
+              "text": "Your users are in Boston and your backup team is in Austin. Which US region would you shortlist for the app, and how many zones would you deploy to?",
+              "narration": "Practice the placement decision: near the users, across multiple zones. This reasoning applies to every cloud provider."
+            }
+          ]
+        },
+        {
+          "id": "cloud-services",
+          "title": "The service menu",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "The service menu",
+              "lede": "Every cloud sells the same three things in different packaging: compute, storage, and network.",
+              "narration": "This lecture tours the service categories: compute, storage, networking, and managed databases."
+            },
+            {
+              "kind": "bullets",
+              "heading": "Compute, storage, network",
+              "bullets": [
+                "Compute runs your code: virtual machines, containers, or serverless functions that run on demand.",
+                "Storage holds your data: object storage for files, block disks for databases, file shares for shared folders.",
+                "Networking connects it all: virtual private networks, load balancers, and DNS.",
+                "Managed databases (relational, NoSQL, caches) trade control for freedom from patching and backups.",
+                "Service names hint at their category: EC2 is compute, S3 is storage, VPC is network."
+              ],
+              "narration": "Every cloud app is some mix of compute, storage, and network. Managed services sell you the same pieces with the maintenance included."
+            },
+            {
+              "kind": "diagram",
+              "heading": "The cloud stack",
+              "diagram": {
+                "type": "layers",
+                "title": "The cloud stack",
+                "nodes": ["your app", "compute: VMs, containers, functions", "storage: objects, disks, databases", "network: virtual network, balancer, DNS"],
+                "note": "Your app sits on compute, compute reads storage, and the network ties every piece together."
+              },
+              "narration": "Picture the stack as layers: your app on top, compute running it, storage holding its data, and networking connecting all three."
+            },
+            {
+              "kind": "code",
+              "heading": "Reading a service name",
+              "code": {
+                "lang": "text",
+                "code": "EC2, Azure VMs, OCI Compute   -> runs your code (compute)\nS3, Blob Storage, Object Storage -> holds files (storage)\nVPC, VNet, VCN                   -> private network (network)\nRDS, Azure SQL, MySQL HeatWave   -> managed database"
+              },
+              "walkthrough": "Different providers, same categories. Once you can sort any service into compute, storage, network, or database, every provider's hundred-service menu becomes navigable.",
+              "narration": "Provider names differ; categories do not. Sorting services into compute, storage, network, or database is the skill that transfers across clouds."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: sort the workload",
+              "text": "Match each need to a category: run a web app, store nightly backups, give servers a private network, keep user accounts queryable.",
+              "narration": "Sort four everyday needs into compute, storage, network, or database. This categorization is the first step of every cloud design."
+            }
+          ]
+        },
+        {
+          "id": "cloud-billing-shared",
+          "title": "Billing and shared responsibility",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "Billing and shared responsibility",
+              "lede": "The cloud bills by the sip, and security is split down the middle. Both surprise beginners — neither has to.",
+              "narration": "This lecture covers pay-as-you-go billing and the shared-responsibility model: what the provider secures versus what you secure."
+            },
+            {
+              "kind": "bullets",
+              "heading": "Pay as you go",
+              "bullets": [
+                "The cloud bills for what you use: compute hours, gigabytes stored, requests served, data transferred.",
+                "Resources you forget to delete keep billing. A test server left running all month is a real invoice line.",
+                "Billing dimensions differ per service: learn the two or three that apply to what you launched.",
+                "Set billing alerts early. A $10 alert teaches the same lesson as a $1,000 surprise, cheaper.",
+                "Tags and labels let you attribute costs to teams and projects when the bill arrives."
+              ],
+              "narration": "Cloud billing rewards attention: know what you launched, alert on spend, and delete what you no longer need."
+            },
+            {
+              "kind": "diagram",
+              "heading": "Shared responsibility",
+              "diagram": {
+                "type": "compare",
+                "title": "Shared responsibility",
+                "nodes": ["provider: buildings, hosts, hypervisor", "you: code, data, access"],
+                "note": "The provider secures the cloud itself; you secure what you put in it. More managed services move the line toward the provider."
+              },
+              "narration": "Security is split: the provider guards the physical cloud, you guard everything you deploy in it. The line shifts with how managed the service is."
+            },
+            {
+              "kind": "bullets",
+              "heading": "Common pitfalls",
+              "bullets": [
+                "Leaving test resources running. The number one beginner cloud bill is a forgotten experiment.",
+                "No billing alerts. Set them on day one, before you need them.",
+                "Assuming the cloud backs up your data for you. Backups are your responsibility unless a managed service promises them.",
+                "Wide-open access rules. A storage bucket readable by the whole internet is a breach waiting for a scanner."
+              ],
+              "narration": "The expensive mistakes are all avoidable: forgotten resources, missing alerts, assumed backups, and open access. Check all four before you deploy anything real."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: draw the line",
+              "text": "List two things the cloud provider always handles and two things that are always yours, for a virtual machine you rent.",
+              "narration": "Draw the responsibility line for a virtual machine yourself. Knowing exactly where your duties start prevents both neglect and duplicated effort."
+            }
+          ]
+        }
+      ]
+    },    {
+      "id": "programming-basics",
+      "title": "Programming Basics",
+      "audience": "Absolute beginners who have never written code: what code is, how programs run, variables, input, and output.",
+      "lectures": [
+        {
+          "id": "prog-what-is-code",
+          "title": "What code actually is",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "What code actually is",
+              "lede": "Code is a set of instructions written in a language both humans and computers can follow.",
+              "narration": "This lecture defines code, programs, and programming languages — the vocabulary every later track assumes."
+            },
+            {
+              "kind": "bullets",
+              "heading": "Code in one minute",
+              "bullets": [
+                "Code is instructions written in a programming language: text files a computer can execute.",
+                "A program is code that does something when run: a calculator, a website, a game.",
+                "Programming languages differ in style and strengths, not in magic. Python, Java, C, and JavaScript all express the same ideas.",
+                "A program is data plus logic: values it works with, and instructions for what to do with them.",
+                "You do not need math genius to start. You need patience and a willingness to experiment."
+              ],
+              "narration": "Code is written instructions, a program is those instructions running, and languages are stylistic choices over shared ideas. Data plus logic is the whole game."
+            },
+            {
+              "kind": "diagram",
+              "heading": "From idea to running program",
+              "diagram": {
+                "type": "hierarchy",
+                "title": "From idea to running program",
+                "nodes": ["idea in your head", "code: a text file", "running program", "result on screen"],
+                "note": "Code is the bridge between an idea and a running program. Everything else is detail."
+              },
+              "narration": "Every program travels the same road: an idea becomes text, the text runs, and a result appears. Learning to program is learning to write that middle step."
+            },
+            {
+              "kind": "code",
+              "heading": "The smallest program",
+              "code": {
+                "lang": "python",
+                "code": "print(2 + 3)"
+              },
+              "walkthrough": "print displays a value. 2 + 3 is arithmetic the computer evaluates first, giving 5. Running this prints the single character 5. One line, one idea, one result.",
+              "narration": "The smallest real program: print a sum. The computer evaluates the arithmetic, then displays the answer."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: program versus document",
+              "text": "In one sentence, describe what a program does that a document does not. (Hint: think about what happens when each one runs.)",
+              "narration": "Distinguish programs from documents in your own words. A program acts; a document sits — that difference is the starting point."
+            }
+          ]
+        },
+        {
+          "id": "prog-how-runs",
+          "title": "How programs run",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "How programs run",
+              "lede": "Your code becomes machine action through layers: interpreters, operating systems, and the CPU itself.",
+              "narration": "This lecture explains how code executes: machine instructions, compiled versus interpreted languages, and the layers in between."
+            },
+            {
+              "kind": "bullets",
+              "heading": "From text to action",
+              "bullets": [
+                "The CPU only understands machine instructions: tiny operations like add these numbers or jump there.",
+                "Compiled languages translate your whole file into machine code before running. C and C++ work this way.",
+                "Interpreted languages run your code line by line through an interpreter. Python and JavaScript work this way.",
+                "The operating system manages resources: memory, files, and which program runs when.",
+                "Memory holds your program's data while it runs. Turn off the power and RAM forgets everything."
+              ],
+              "narration": "CPUs run machine instructions; compilers and interpreters bridge your text to those instructions; the operating system manages the resources programs share."
+            },
+            {
+              "kind": "diagram",
+              "heading": "The execution layers",
+              "diagram": {
+                "type": "layers",
+                "title": "The execution layers",
+                "nodes": ["your code", "interpreter or compiler", "operating system", "CPU and memory"],
+                "note": "Each layer translates for the one below it. You write for the top; the bottom does the work."
+              },
+              "narration": "Four layers turn your text into action: your code, a translator, the operating system, and the hardware. Bugs can hide at any layer, but beginners live at the top."
+            },
+            {
+              "kind": "code",
+              "heading": "Two paths to running",
+              "code": {
+                "lang": "text",
+                "code": "app.py  ->  python3  ->  runs now        (interpreted)\napp.c   ->  gcc      ->  app  ->  runs    (compiled)"
+              },
+              "walkthrough": "Python source runs immediately through the interpreter: one step. C source goes through the compiler gcc first, producing a machine-code file called app, which then runs: two steps. Interpreted is faster to try; compiled is faster to run.",
+              "narration": "Interpreted languages run in one step, compiled languages in two. The tradeoff is iteration speed versus execution speed."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: which is which",
+              "text": "Answer from what you learned: is Python interpreted or compiled? What about C? Say why the difference matters when you are experimenting.",
+              "narration": "Classify Python and C, and explain why interpreted languages suit experimentation. Naming the tradeoff shows you understood the layers."
+            }
+          ]
+        },
+        {
+          "id": "prog-variables-io",
+          "title": "Variables, input, and output",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "Variables, input, and output",
+              "lede": "Variables remember, input listens, output speaks. These three are the senses of every program.",
+              "narration": "This lecture teaches variables, reading input, printing output, and the types that decide what + means."
+            },
+            {
+              "kind": "bullets",
+              "heading": "Remember, listen, speak",
+              "bullets": [
+                "A variable is a named box holding a value: `city = \"Boston\"` stores text under the name city.",
+                "Assignment uses a single =. It stores the right side's value into the left side's name.",
+                "input() pauses and reads a line the user types, always returning text.",
+                "print() displays values. Text and numbers print the same way; combining them has rules.",
+                "Types matter: + adds numbers but joins text. Mixing them without converting is an error."
+              ],
+              "narration": "Variables store, input reads, print shows. The type of a value — text or number — decides what operations like plus are allowed to do."
+            },
+            {
+              "kind": "code",
+              "heading": "Input, variables, output",
+              "code": {
+                "lang": "python",
+                "code": "name = input(\"Your name? \")\nprint(\"Hello, \" + name)\n\nage = 30\nprint(age + 1)"
+              },
+              "walkthrough": "input asks for a name and stores the typed text in name. The first print joins Hello, with that text. age holds the number 30, so age + 1 is arithmetic and prints 31.",
+              "narration": "This program listens, remembers, and speaks: it reads a name, greets it, then does arithmetic on a number. Text joins, numbers add."
+            },
+            {
+              "kind": "diagram",
+              "heading": "Same symbol, different types",
+              "diagram": {
+                "type": "compare",
+                "title": "Same symbol, different types",
+                "nodes": ["text + text: joins", "\"a\" + \"b\" = \"ab\"", "number + number: adds", "2 + 3 = 5"],
+                "note": "The type decides what + does. Mixing types without converting is an error in most languages."
+              },
+              "narration": "Plus joins text but adds numbers. The type of the values — not the symbol — decides the operation."
+            },
+            {
+              "kind": "bullets",
+              "heading": "Common pitfalls",
+              "bullets": [
+                "Adding text to a number. \"30\" + 1 fails; convert first or keep types consistent.",
+                "Forgetting quotes around text. Boston without quotes looks like a variable name.",
+                "Confusing = (store a value) with == (compare two values). One assigns, the other asks.",
+                "Typos in variable names. Python treats name and naem as two different variables."
+              ],
+              "narration": "The beginner classics: mixing types, forgetting quotes, confusing assignment with comparison, and typos that create phantom variables."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: three lines",
+              "text": "Write three lines: store your city in a variable, store a number in another variable, and print both on one line.",
+              "narration": "Write a three-line program using two variables and one print. Small programs that work beat big programs that do not."
+            }
+          ]
+        }
+      ]
+    },    {
+      "id": "http-web",
+      "title": "HTTP & the Web",
+      "audience": "Beginners heading into web development: how browsers work, URLs, status codes, and what APIs are.",
+      "lectures": [
+        {
+          "id": "web-browser-journey",
+          "title": "The browser's journey",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "The browser's journey",
+              "lede": "Loading a page looks instant. Underneath, your browser runs a six-step relay race every single time.",
+              "narration": "This lecture follows a page load from keystroke to pixels: DNS, connection, request, response, and rendering."
+            },
+            {
+              "kind": "bullets",
+              "heading": "What happens when you press Enter",
+              "bullets": [
+                "You type a URL. The browser parses it into scheme, host, path, and query.",
+                "DNS translates the host name into an IP address so the browser knows where to connect.",
+                "The browser opens a connection to the server, encrypted with TLS when the scheme is https.",
+                "It sends an HTTP request: method, path, headers, and sometimes a body.",
+                "The server replies with a status code, headers, and the page content. The browser renders it.",
+                "Images, styles, and scripts each trigger their own request/response cycle."
+              ],
+              "narration": "A page load is a relay: parse, resolve, connect, request, respond, render. Each leg can fail independently, which is why knowing the steps helps you debug."
+            },
+            {
+              "kind": "diagram",
+              "heading": "One page load",
+              "diagram": {
+                "type": "cycle",
+                "title": "One page load",
+                "nodes": ["type the URL", "DNS lookup", "connect to server", "send request", "receive response", "render the page"],
+                "note": "A modern page repeats the request/response part dozens of times for its images, styles, and scripts."
+              },
+              "narration": "Six steps, repeated per resource. Slowness can hide in any step, so professionals learn to measure each one."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: count the requests",
+              "text": "Open your browser's developer tools (F12), switch to the Network tab, and reload any page. Count how many requests one page load actually makes.",
+              "narration": "Watch the relay race live in the Network tab. The request count surprises everyone the first time."
+            }
+          ]
+        },
+        {
+          "id": "web-urls-methods-codes",
+          "title": "URLs, methods, and status codes",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "URLs, methods, and status codes",
+              "lede": "URLs name things, methods say what you want, and status codes report what happened. Three vocabularies, one conversation.",
+              "narration": "This lecture dissects URLs, HTTP methods, and the status code families you will read for the rest of your career."
+            },
+            {
+              "kind": "bullets",
+              "heading": "Methods and status codes",
+              "bullets": [
+                "Methods say what you want: GET reads, POST submits, PUT replaces, DELETE removes.",
+                "Status codes report the outcome. The first digit tells the story of who is at fault.",
+                "2xx means success (200 OK). 3xx means redirect: look over there instead.",
+                "4xx means your mistake: 404 not found, 403 forbidden, 401 unauthorized.",
+                "5xx means their mistake: 500 internal server error, 503 service unavailable."
+              ],
+              "narration": "Methods express intent, status codes report results. The first digit of the code tells you whether to fix your request or wait for the server."
+            },
+            {
+              "kind": "code",
+              "heading": "Anatomy of a URL",
+              "code": {
+                "lang": "text",
+                "code": "https://shop.example.com/search?q=boots#top\n|___|  |______________| |_____| |__| |__|\nscheme       host          path  query fragment"
+              },
+              "walkthrough": "https is the scheme: encrypted HTTP. shop.example.com is the host to connect to. /search is the path: which resource. ?q=boots is the query: parameters for the request. #top is the fragment: handled by the browser, never sent to the server.",
+              "narration": "Every URL has the same five parts. The query carries parameters, and the fragment never leaves your browser."
+            },
+            {
+              "kind": "diagram",
+              "heading": "Status code families",
+              "diagram": {
+                "type": "compare",
+                "title": "Status code families",
+                "nodes": ["2xx: success", "3xx: redirect", "4xx: your mistake", "5xx: their mistake"],
+                "note": "Read the first digit. It tells you whether the request worked, moved, was wrong, or the server broke."
+              },
+              "narration": "Four families cover every outcome. When debugging, the first digit decides your next move: retry, fix the URL, or escalate."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: diagnose",
+              "text": "Two scenarios: you see a 404, then a 500. For each, say in one sentence what happened and whose fault it is.",
+              "narration": "Practice reading status codes as diagnoses. 404 is yours to fix; 500 is theirs to fix."
+            }
+          ]
+        },
+        {
+          "id": "web-apis",
+          "title": "APIs: programs talking to programs",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "APIs: programs talking to programs",
+              "lede": "An API is a menu for programs: order data in a fixed format, get data back in a fixed format.",
+              "narration": "This lecture explains APIs: endpoints, JSON as the common language, and how apps fetch data behind the scenes."
+            },
+            {
+              "kind": "bullets",
+              "heading": "API basics",
+              "bullets": [
+                "An API (Application Programming Interface) is a set of rules for programs to request data from each other.",
+                "An endpoint is a URL that does one job, like /users/42 returning user 42's profile.",
+                "JSON is the common data language: lightweight text both humans and programs can read.",
+                "Requests often carry keys or tokens proving who is asking. Never share yours.",
+                "Your weather app, your maps app, your social feed: all of them are API clients wearing a pretty interface."
+              ],
+              "narration": "APIs let programs order data like from a menu: endpoints name the dishes, JSON is the plating, and keys prove you may order."
+            },
+            {
+              "kind": "code",
+              "heading": "JSON, the API language",
+              "code": {
+                "lang": "json",
+                "code": "{\n  \"name\": \"Alex\",\n  \"city\": \"Boston\",\n  \"scores\": [88, 92, 79]\n}"
+              },
+              "walkthrough": "Curly braces mark an object: named values. Square brackets mark an array: an ordered list. Strings sit in quotes, numbers do not. This object has a name, a city, and a list of three scores.",
+              "narration": "JSON has two structures: objects for named values, arrays for ordered lists. Nearly every API response you will ever see is built from these."
+            },
+            {
+              "kind": "diagram",
+              "heading": "An API call",
+              "diagram": {
+                "type": "flow",
+                "title": "An API call",
+                "nodes": ["your app", "GET /users/42", "API server", "JSON response", "your app displays it"],
+                "note": "Same request/response idea as the browser — but data instead of pages, and a program instead of a person reading it."
+              },
+              "narration": "An API call mirrors a page load: request, response, display. The difference is that a program, not a person, consumes the answer."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: design a call",
+              "text": "A weather app needs the forecast for Boston. Write down the endpoint it might call and sketch the JSON it might get back (city, temperature, condition).",
+              "narration": "Design an API call on paper: endpoint plus JSON shape. Thinking in endpoints and payloads is the core API skill."
+            }
+          ]
+        }
+      ]
+    },    {
+      "id": "hardware",
+      "title": "Computer Hardware Basics",
+      "audience": "Beginners who need the physical picture: what the CPU, RAM, and storage do and why their sizes matter.",
+      "lectures": [
+        {
+          "id": "hw-cpu",
+          "title": "CPU: the brain",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "CPU: the brain",
+              "lede": "The processor executes every instruction your computer runs. Cores and clock speed decide how fast.",
+              "narration": "This lecture explains the CPU: cores, clock speed, and the fetch-decode-execute cycle behind every computation."
+            },
+            {
+              "kind": "bullets",
+              "heading": "The processor",
+              "bullets": [
+                "The CPU (Central Processing Unit) executes machine instructions: the tiny steps every program is made of.",
+                "A core is an independent worker inside the CPU. Four cores can do four things truly at once.",
+                "Clock speed, measured in GHz (billions of cycles per second), says how fast each core works.",
+                "More cores means more parallelism; higher GHz means each task finishes sooner.",
+                "Cache is ultra-fast memory on the CPU itself, holding the data the current work needs most."
+              ],
+              "narration": "The CPU executes instructions; cores parallelize them; clock speed paces them. Cache keeps the hottest data within arm's reach."
+            },
+            {
+              "kind": "diagram",
+              "heading": "Inside a CPU",
+              "diagram": {
+                "type": "hierarchy",
+                "title": "Inside a CPU",
+                "nodes": ["CPU", "core 1 .. core 8", "each core: fetch, decode, execute"],
+                "note": "Every core repeats the same cycle billions of times per second: fetch an instruction, decode it, execute it."
+              },
+              "narration": "A CPU is cores, and each core is a relentless loop: fetch, decode, execute. Everything your computer does is this cycle, repeated."
+            },
+            {
+              "kind": "code",
+              "heading": "Reading a spec line",
+              "code": {
+                "lang": "text",
+                "code": "\"8-core 3.2 GHz\"\n   |        |\n   |        +-- each core ticks 3.2 billion times/sec\n   +-- 8 workers running in parallel\n\ntwice the cores ~= twice the multitasking\ntwice the GHz   ~= each task finishes sooner"
+              },
+              "walkthrough": "8-core means eight parallel workers. 3.2 GHz means each worker cycles 3.2 billion times per second. Marketing leans on both numbers because each measures a different kind of speed.",
+              "narration": "Spec lines decode cleanly: cores count parallelism, gigahertz counts pace. Neither alone tells the whole performance story."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: check your cores",
+              "text": "Look up your own device's processor specs (search the model name plus specs). How many cores does it have, and what is its clock speed?",
+              "narration": "Find your own CPU's core count and speed. Reading real specs makes the abstract numbers concrete."
+            }
+          ]
+        },
+        {
+          "id": "hw-ram-storage",
+          "title": "RAM versus storage",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "RAM versus storage",
+              "lede": "RAM is the desk; storage is the filing cabinet. You need both, for opposite reasons.",
+              "narration": "This lecture contrasts RAM and storage: speed versus permanence, and the size units from bytes to terabytes."
+            },
+            {
+              "kind": "bullets",
+              "heading": "Two kinds of memory",
+              "bullets": [
+                "RAM (Random Access Memory) is the fast workspace where running programs live. Power off and it forgets everything.",
+                "Storage (SSDs, hard drives) is the slow keeper: files survive reboots, but access takes longer.",
+                "Running programs and their data sit in RAM. Saved documents, photos, and the OS itself sit on storage.",
+                "More RAM means more programs open smoothly at once. More storage means more files kept.",
+                "SSDs are fast, silent storage with no moving parts. Hard drives are slower, cheaper per gigabyte."
+              ],
+              "narration": "RAM is fast and forgetful; storage is slow and permanent. Programs run in the first and are saved in the second."
+            },
+            {
+              "kind": "diagram",
+              "heading": "RAM versus storage",
+              "diagram": {
+                "type": "compare",
+                "title": "RAM versus storage",
+                "nodes": ["RAM: fast, temporary, pricey", "Storage: slower, permanent, cheap"],
+                "note": "When RAM fills up, the computer slows down. When storage fills up, you cannot save new files."
+              },
+              "narration": "The tradeoff is speed and permanence against cost. Knowing which is full tells you whether to close apps or delete files."
+            },
+            {
+              "kind": "code",
+              "heading": "The size ladder",
+              "code": {
+                "lang": "text",
+                "code": "bit -> byte (8 bits) -> KB -> MB -> GB -> TB\neach step is roughly 1000x the last\n\na text message  ~= a few KB\na photo         ~= 3 MB\na movie         ~= 2 GB\na laptop drive  ~= 512 GB"
+              },
+              "walkthrough": "Sizes climb in thousand-fold steps from bytes to terabytes. The examples anchor each unit: messages in kilobytes, photos in megabytes, movies in gigabytes, drives in hundreds of gigabytes.",
+              "narration": "Bytes scale in thousand-fold steps. Anchoring each unit to a familiar file — photo, movie, drive — makes sizes intuitive."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: RAM or storage",
+              "text": "Two specs: 16 GB RAM, and a 512 GB SSD. Which is the workspace and which is the filing cabinet? What happens when each one fills up?",
+              "narration": "Classify the two specs and predict the symptom of each filling up. This distinction resolves half of all my computer is slow complaints."
+            }
+          ]
+        },
+        {
+          "id": "hw-bits-bytes",
+          "title": "Bits, bytes, and why sizes matter",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "Bits, bytes, and why sizes matter",
+              "lede": "Everything digital is built from bits. Understand the bit-to-byte ladder and storage math stops being mysterious.",
+              "narration": "This lecture builds the size ladder from bits to megabytes, and connects it to the binary math module."
+            },
+            {
+              "kind": "bullets",
+              "heading": "Bits and bytes",
+              "bullets": [
+                "A bit is one binary digit: 0 or 1. It is the smallest possible piece of information.",
+                "A byte is 8 bits. One byte can represent 256 different values (0 through 255).",
+                "Roughly one byte stores one text character, which is why file sizes track character counts.",
+                "Computers count sizes in powers of two: 1 KB is 1024 bytes, not 1000.",
+                "The binary math module teaches the actual conversions step by step."
+              ],
+              "narration": "Bits are the atoms, bytes are the molecules: eight bits make a byte, and bytes stack into kilobytes in powers of two."
+            },
+            {
+              "kind": "diagram",
+              "heading": "The binary size ladder",
+              "diagram": {
+                "type": "layers",
+                "title": "The binary size ladder",
+                "nodes": ["bit: 0 or 1", "8 bits = 1 byte", "1024 bytes = 1 KB", "1024 KB = 1 MB"],
+                "note": "Storage math is powers of two. Marketers sometimes use 1000 instead of 1024, which is why drives seem smaller than advertised."
+              },
+              "narration": "Each rung multiplies by 1024. The gap between marketing's 1000 and computing's 1024 explains the missing gigabytes on every new drive."
+            },
+            {
+              "kind": "code",
+              "heading": "Worked: bytes in 2 KB",
+              "code": {
+                "lang": "text",
+                "code": "1 KB = 1024 bytes\n2 KB = 2 x 1024 = 2048 bytes\n\nin bits: 2048 bytes x 8 = 16,384 bits"
+              },
+              "walkthrough": "Start from the definition: one kilobyte is 1024 bytes. Double it for two kilobytes: 2048 bytes. Each byte is 8 bits, so multiply by 8 for the bit count: 16,384 bits.",
+              "narration": "A worked conversion: kilobytes to bytes to bits, one multiplication at a time. The binary module practices this pattern until it is automatic."
+            },
+            {
+              "kind": "bullets",
+              "heading": "Common pitfalls",
+              "bullets": [
+                "Bits (b) versus bytes (B). Network speeds are quoted in bits: 100 Mbps is about 12.5 megabytes per second.",
+                "Marketing gigabytes (1000-based) versus real gibibytes (1024-based). Your 1 TB drive holds about 931 GiB.",
+                "Confusing RAM gigabytes with disk gigabytes. 16 GB of RAM and 512 GB of disk are different pools.",
+                "Assuming bigger numbers always win. A fast 8 GB machine can beat a slow 16 GB one."
+              ],
+              "narration": "The expensive confusions: bits versus bytes, marketing math versus real math, and RAM versus disk. All four are easy once named."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: quick conversions",
+              "text": "How many bits are in 2 bytes? How many bytes in 3 KB? (Answers: 16 bits, 3072 bytes.) Then open the binary math module for the full workout.",
+              "narration": "Do two quick conversions by hand, then continue into the binary module where the arithmetic gets a full step-by-step treatment."
+            }
+          ]
+        }
+      ]
+    },    {
+      "id": "security-basics",
+      "title": "Security Basics",
+      "audience": "Beginners entering any security-adjacent path: the CIA triad, threats versus vulnerabilities, and defense in depth.",
+      "lectures": [
+        {
+          "id": "sec-cia",
+          "title": "The CIA triad",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "The CIA triad",
+              "lede": "All of security serves three goals: keep secrets secret, keep data correct, and keep systems up.",
+              "narration": "This lecture introduces the CIA triad — confidentiality, integrity, availability — the three goals behind every security control."
+            },
+            {
+              "kind": "bullets",
+              "heading": "Three goals",
+              "bullets": [
+                "Confidentiality: only the right eyes see it. Passwords, encryption, and access controls serve this.",
+                "Integrity: data stays correct and trustworthy. Checksums, signatures, and audit logs serve this.",
+                "Availability: systems are there when needed. Backups, redundancy, and DDoS defenses serve this.",
+                "Every security control serves at least one of the three. Ask which one and the control's purpose becomes clear.",
+                "The three trade off: extreme secrecy can hurt availability, and vice versa. Balance is the job."
+              ],
+              "narration": "Confidentiality guards who sees, integrity guards what is true, availability guards whether it works. Every control serves at least one."
+            },
+            {
+              "kind": "diagram",
+              "heading": "The triad",
+              "diagram": {
+                "type": "compare",
+                "title": "The triad",
+                "nodes": ["Confidentiality: secrets stay secret", "Integrity: data stays correct", "Availability: systems stay up"],
+                "note": "A breach of any one is a security incident. Strong security covers all three at once."
+              },
+              "narration": "Three pillars, one building. A leaked password breaks confidentiality, altered records break integrity, and an outage breaks availability."
+            },
+            {
+              "kind": "code",
+              "heading": "Controls and their letters",
+              "code": {
+                "lang": "text",
+                "code": "passwords        -> C (only you get in)\nbackups          -> A (restore after disaster)\nchecksums        -> I (detect tampering)\nfirewalls        -> C + A (block attackers, keep service up)\naudit logs       -> I (prove what happened)"
+              },
+              "walkthrough": "Each control maps to the goal it serves. Passwords protect confidentiality, backups protect availability, checksums protect integrity. Firewalls serve two goals at once, which is common.",
+              "narration": "Mapping controls to letters turns a vocabulary list into a system: every tool you meet later will fit somewhere on this map."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: which letter",
+              "text": "A bank's website goes down for an hour. Which leg of the triad broke? What about a leaked customer list, and silently altered transaction records?",
+              "narration": "Classify three incidents by triad leg. This classification is the first step of every incident report you will ever read."
+            }
+          ]
+        },
+        {
+          "id": "sec-threats",
+          "title": "Threats, vulnerabilities, and risk",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "Threats, vulnerabilities, and risk",
+              "lede": "Security vocabulary in one chain: a threat exploits a vulnerability, creating risk to something you care about.",
+              "narration": "This lecture defines threats, vulnerabilities, and risk — the three words every security conversation is built from."
+            },
+            {
+              "kind": "bullets",
+              "heading": "The vocabulary",
+              "bullets": [
+                "A threat is who or what could cause harm: criminals, malware, disgruntled insiders, natural disasters.",
+                "A vulnerability is a weakness a threat can exploit: unpatched software, weak passwords, unlocked doors.",
+                "An asset is what you protect: data, systems, reputation, people.",
+                "Risk is likelihood times impact: how probable the incident is, multiplied by how bad it would be.",
+                "Attack surface is everything exposed to threats: every open port, every login page, every employee."
+              ],
+              "narration": "Threats act, vulnerabilities allow, assets suffer, and risk measures the combination. Shrinking the attack surface shrinks them all."
+            },
+            {
+              "kind": "diagram",
+              "heading": "The attack chain",
+              "diagram": {
+                "type": "flow",
+                "title": "The attack chain",
+                "nodes": ["threat actor", "exploits vulnerability", "impacts asset", "incident"],
+                "note": "Break any link — remove the threat's access, patch the weakness, protect the asset — and the incident never happens."
+              },
+              "narration": "Every incident follows this chain: someone exploits something to hurt something. Defense means breaking the chain at its weakest link."
+            },
+            {
+              "kind": "code",
+              "heading": "Risk as arithmetic",
+              "code": {
+                "lang": "text",
+                "code": "risk = likelihood x impact\n\nweak password on a test blog:\n  likelihood high x impact low  = medium risk\n\nweak password on the payroll system:\n  likelihood high x impact high = critical risk\n\nsame weakness, different asset, different risk"
+              },
+              "walkthrough": "Risk multiplies two judgments: how likely and how bad. The same weak password is medium risk on a test blog but critical on payroll, because the asset's value changed the impact.",
+              "narration": "Risk is likelihood times impact. The same vulnerability carries different risk depending on what it guards — which is why asset value matters."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: your laptop",
+              "text": "Name one threat, one vulnerability, and one asset for your own laptop. Then say which link in the chain you would break first.",
+              "narration": "Apply the vocabulary to your own machine. Personal examples make the abstract chain concrete."
+            }
+          ]
+        },
+        {
+          "id": "sec-defense-depth",
+          "title": "Defense in depth",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "Defense in depth",
+              "lede": "No single control is perfect. Security stacks layers so an attacker must beat every one.",
+              "narration": "This lecture teaches defense in depth: layered controls, least privilege, and the habits that make layers work."
+            },
+            {
+              "kind": "bullets",
+              "heading": "Layers, not walls",
+              "bullets": [
+                "Defense in depth stacks independent controls: if one fails, the next one catches the attacker.",
+                "Typical layers: physical (locked doors), network (firewalls), host (patches, antivirus), app (input checks), data (encryption), people (training).",
+                "Least privilege shrinks what each layer must defend: fewer permissions, smaller blast radius.",
+                "Patching closes known vulnerabilities before threats exploit them. Automate it where you can.",
+                "Backups are the last layer: when everything else fails, restore and carry on."
+              ],
+              "narration": "Layers turn single points of failure into a gauntlet. Each independent control forces the attacker to start over."
+            },
+            {
+              "kind": "diagram",
+              "heading": "The layers",
+              "diagram": {
+                "type": "layers",
+                "title": "The layers",
+                "nodes": ["people: training", "data: encryption", "app: input checks", "host: patches, antivirus", "network: firewall", "physical: locked doors"],
+                "note": "An attacker must beat every layer; defenders need only one layer to catch them."
+              },
+              "narration": "Six layers from people to physical. The asymmetry favors defenders: the attacker needs a perfect run, you need a single catch."
+            },
+            {
+              "kind": "bullets",
+              "heading": "Common pitfalls",
+              "bullets": [
+                "We have a firewall, so we are safe. One layer is never the whole strategy.",
+                "Security through obscurity: hiding something is not protecting it. Assume attackers will find it.",
+                "Ignoring the human layer. Phishing beats firewalls because it targets people, not ports.",
+                "Set and forget. Unpatched layers rot: today's defense is next year's vulnerability."
+              ],
+              "narration": "The classic failures: trusting one layer, hiding instead of securing, forgetting people, and letting defenses rot unpatched."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: protect your email",
+              "text": "List two layers currently protecting your email account (for example, a password and a second factor). What third layer could you add?",
+              "narration": "Audit your own email's layers. Seeing defense in depth in your own accounts makes the model stick."
+            }
+          ]
+        }
+      ]
+    },    {
+      "id": "data-basics",
+      "title": "Data Basics",
+      "audience": "Beginners heading into data or database paths: what data is, types, keys, messy data, and asking questions of it.",
+      "lectures": [
+        {
+          "id": "data-tables-types",
+          "title": "Tables, types, and keys",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "Tables, types, and keys",
+              "lede": "Data is recorded facts. Types keep those facts honest, and keys keep them findable.",
+              "narration": "This lecture defines data, column types, primary keys, and NULL — the vocabulary of every database you will meet."
+            },
+            {
+              "kind": "bullets",
+              "heading": "Data vocabulary",
+              "bullets": [
+                "Data is recorded facts: names, prices, timestamps, measurements.",
+                "A type is a promise about what a column holds: text, numbers, dates, or true/false.",
+                "Types prevent nonsense: a date column rejects the word banana, catching errors early.",
+                "A primary key uniquely identifies each row, like an id no two records share.",
+                "NULL means missing or unknown. It is not zero and not an empty string — it is the absence of a value."
+              ],
+              "narration": "Types are promises that catch errors early; primary keys make rows findable; NULL honestly marks the unknown."
+            },
+            {
+              "kind": "diagram",
+              "heading": "Data, organized",
+              "diagram": {
+                "type": "hierarchy",
+                "title": "Data, organized",
+                "nodes": ["database", "table: orders", "columns with types", "rows of values"],
+                "note": "Databases hold tables, tables hold typed columns, columns hold rows of values. Types are enforced at the column level."
+              },
+              "narration": "The organization ladder: database to table to typed column to row. Each level adds structure the level above relies on."
+            },
+            {
+              "kind": "code",
+              "heading": "Types in a table",
+              "code": {
+                "lang": "text",
+                "code": "orders\norder_id  (number, primary key)\ncustomer  (text)\norder_date (date)\ntotal     (number)\nshipped   (true/false)\n\nrow: 101, \"Alex\", 2026-10-01, 49.99, true"
+              },
+              "walkthrough": "Five columns, five types. order_id is the primary key: unique per row. The sample row shows each type in action: a number, text in quotes, an ISO date, a decimal, and a boolean.",
+              "narration": "One table, five typed columns, one sample row. Reading a schema like this is the first skill of working with data."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: type it",
+              "text": "For a playlist table, choose types for: song title, artist, duration in seconds, release date, and whether you liked it. Which column is the primary key?",
+              "narration": "Assign types to a playlist's columns and pick a primary key. Typing data well prevents entire categories of bugs."
+            }
+          ]
+        },
+        {
+          "id": "data-clean-messy",
+          "title": "Clean versus messy data",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "Clean versus messy data",
+              "lede": "Real-world data arrives messy. Cleaning it — standardizing, deduping, validating — is most of the job.",
+              "narration": "This lecture covers messy data: the common defects, the cleaning process, and why garbage in means garbage out."
+            },
+            {
+              "kind": "bullets",
+              "heading": "Why data is messy",
+              "bullets": [
+                "Duplicates: the same customer entered twice with slightly different spelling.",
+                "Inconsistency: Boston, boston, and ' Boston ' are three spellings of one city.",
+                "Missing values: blank fields where data was never collected or was lost.",
+                "Wrong formats: dates as 10/4/26 in one row and Oct 4 2026 in another.",
+                "Garbage in, garbage out: analysis on messy data produces confident wrong answers."
+              ],
+              "narration": "Duplicates, inconsistent spelling, missing values, and mixed formats are the usual suspects. Analysis built on them lies with confidence."
+            },
+            {
+              "kind": "diagram",
+              "heading": "The cleaning pipeline",
+              "diagram": {
+                "type": "flow",
+                "title": "The cleaning pipeline",
+                "nodes": ["raw data", "find problems", "standardize and dedupe", "validate", "clean data"],
+                "note": "Cleaning is usually most of the work on a data project. That is normal, not a sign of failure."
+              },
+              "narration": "Cleaning is a pipeline: profile the raw data, fix what you find, validate the fixes, and only then analyze."
+            },
+            {
+              "kind": "code",
+              "heading": "Before and after",
+              "code": {
+                "lang": "text",
+                "code": "BEFORE (3 spellings, extra spaces):\n\"  Boston\", \"boston\", \"Boston \"\n\nAFTER (trimmed, one case):\n\"Boston\", \"Boston\", \"Boston\"\n\nnow they match -> duplicates visible -> keep one"
+              },
+              "walkthrough": "Trimming spaces and standardizing case collapses three spellings into one. Only after standardizing can you see the duplicates — and only then can you safely remove them.",
+              "narration": "Standardize first, dedupe second: the order matters, because duplicates hide behind inconsistent formatting."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: spot the mess",
+              "text": "This list has three problems — find them: [\"NYC\", \"new york\", \"N Y C\", \"Boston\", \"boston\"]. What would the cleaned list look like?",
+              "narration": "Find the inconsistencies in the messy list and write the cleaned version. Spotting mess is the first half of cleaning."
+            }
+          ]
+        },
+        {
+          "id": "data-asking",
+          "title": "Asking questions of data",
+          "slides": [
+            {
+              "kind": "title",
+              "heading": "Asking questions of data",
+              "lede": "Data becomes answers when you ask well: count, group, and summarize until the pattern shows.",
+              "narration": "This lecture turns data into answers: aggregation with COUNT, grouping with GROUP BY, and the question-answer loop."
+            },
+            {
+              "kind": "bullets",
+              "heading": "Questions into queries",
+              "bullets": [
+                "A question becomes a query: how many customers per city is a COUNT grouped by city.",
+                "Aggregation summarizes many rows into one number: COUNT, SUM, AVG, MIN, MAX.",
+                "GROUP BY splits rows into buckets first, then aggregates each bucket separately.",
+                "Charts answer visually what tables answer numerically. The right chart makes patterns obvious.",
+                "Each answer suggests the next question. Data work is a loop, not a straight line."
+              ],
+              "narration": "Aggregation compresses rows into answers; grouping buckets them first. Questions, queries, and charts form a loop."
+            },
+            {
+              "kind": "code",
+              "heading": "Counting per group",
+              "code": {
+                "lang": "sql",
+                "code": "SELECT city, COUNT(*) AS customers\nFROM customers\nGROUP BY city;"
+              },
+              "walkthrough": "GROUP BY city splits the rows into one bucket per city. COUNT(*) counts the rows in each bucket. The result has one row per city with its customer count — the answer to how many customers per city.",
+              "narration": "Group, then count: the single most useful query shape in data work. One statement answers a question a spreadsheet would take minutes to answer."
+            },
+            {
+              "kind": "diagram",
+              "heading": "The data loop",
+              "diagram": {
+                "type": "cycle",
+                "title": "The data loop",
+                "nodes": ["question", "query", "result table", "chart", "decision", "next question"],
+                "note": "Decisions raise new questions, which restart the loop. Data work compounds."
+              },
+              "narration": "Data work cycles: questions become queries, results become charts, charts inform decisions, and decisions raise sharper questions."
+            },
+            {
+              "kind": "tryit",
+              "heading": "Try it: ask a question",
+              "text": "A store has an orders table with a total column. What business question does COUNT(*) answer about it? What about AVG(total)?",
+              "narration": "Match aggregations to business questions. Knowing which summary answers which question is the analyst's core instinct."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
