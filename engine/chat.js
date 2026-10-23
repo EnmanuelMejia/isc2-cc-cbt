@@ -26,7 +26,8 @@ var PAGE = window.CHAT_PAGE || {};
 /* ---------------- utils ---------------- */
 function $(id){ return document.getElementById(id); }
 function esc(s){ return String(s == null ? '' : s)
-  .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+  .replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
 function shuffle(a){ var r = a.slice();
   for (var i = r.length - 1; i > 0; i--){
     var j = Math.floor(Math.random() * (i + 1)), t = r[i]; r[i] = r[j]; r[j] = t; }
